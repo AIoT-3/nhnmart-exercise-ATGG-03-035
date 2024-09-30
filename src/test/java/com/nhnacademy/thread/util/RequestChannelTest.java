@@ -69,6 +69,7 @@ class RequestChannelTest {
         });
 
         thread.start();
+        Thread.sleep(2000);
 
         Try<Object> readFieldValue = ReflectionUtils.tryToReadFieldValue(RequestChannel.class, "requestQueue", requestChannel);
         Queue queue = (Queue) readFieldValue.get();
