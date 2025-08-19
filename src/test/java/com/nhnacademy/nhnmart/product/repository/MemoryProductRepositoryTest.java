@@ -36,7 +36,7 @@ class MemoryProductRepositoryTest {
         Product actual = new Product(2l,"주방세제","헨켈","(750㎖) 프릴 베이킹소다 퓨어레몬","개",8900,100);
         productRepository.save(actual);
 
-        //2l 해당되는 product가 정상 등록되었는지 검증 합니다.
+        //2l에 해당되는 product가 정상 등록되었는지 검증합니다.
         Optional<Product> exceptedOptional = productRepository.findById(2l);
         Assertions.assertEquals(exceptedOptional.get(),actual);
     }
@@ -47,7 +47,7 @@ class MemoryProductRepositoryTest {
     void findById() {
         Optional<Product> actualOptional = productRepository.findById(1l);
         Assertions.assertAll(
-            //1l 해당되는 product의 attribute를 검증 합니다.
+            //1l에 해당되는 product의 attribute를 검증합니다.
             ()->Assertions.assertEquals(1l,actualOptional.get().getId()),
             ()->Assertions.assertEquals("주방세제",actualOptional.get().getItem()),
             ()->Assertions.assertEquals("LG",actualOptional.get().getMaker()),
@@ -62,7 +62,7 @@ class MemoryProductRepositoryTest {
     @Order(3)
     @DisplayName("id:2 -> 삭제")
     void deleteById() {
-        //id : 2l 인 product 를 삭제하고 정상처리 되었는지 검증 합니다.
+        //id: 2l인 product를 삭제하고 정상처리 되었는지 검증합니다.
 
         productRepository.deleteById(2l);
         Assertions.assertFalse(productRepository.existById(2l));
@@ -72,7 +72,7 @@ class MemoryProductRepositoryTest {
     @Order(4)
     @DisplayName("product 존재여부 체크")
     void existById() {
-        //existById() 이용해서 제품 존재여부를 체크할 수 있도록 검증합니다.
+        //existById()를 이용해서 제품 존재 여부를 체크할 수 있도록 검증합니다.
         Assertions.assertAll(
                 ()->Assertions.assertTrue(productRepository.existById(1l)),
                 ()->Assertions.assertFalse(productRepository.existById(2l))
@@ -99,7 +99,7 @@ class MemoryProductRepositoryTest {
     @Order(7)
     @DisplayName("product 수량 변경")
     void updateQuantityById() {
-        //id:1 에 해당되는 product의 수량을 변경하고 변경된 결과가 반영 되었는지 검증 합니다.
+        //id:1에 해당되는 product의 수량을 변경하고 변경된 결과가 반영되었는지 검증합니다.
 
         productRepository.updateQuantityById(1l,50);
         Assertions.assertEquals(50,productRepository.countQuantityById(1l));

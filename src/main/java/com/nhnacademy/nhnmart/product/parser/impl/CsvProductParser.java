@@ -37,7 +37,7 @@ public class CsvProductParser implements ProductParser {
     private final InputStream inputStream;
 
     public CsvProductParser() {
-        //기본생성자 구현 , getProductsStream()을 이용해서 inputStream을 초기화 합니다.
+        //기본생성자 구현, getProductsStream()을 이용해서 inputStream을 초기화합니다.
         inputStream = getProductsStream();
         if(Objects.isNull(inputStream)){
             throw new IllegalArgumentException();
@@ -45,7 +45,7 @@ public class CsvProductParser implements ProductParser {
     }
 
     public CsvProductParser(InputStream inputStream){
-        //inputStream prameter로 전달 됩니다. 초기화 합니다.
+        //inputStream parameter로 전달됩니다. 초기화합니다.
         if(Objects.isNull(inputStream)){
             throw new IllegalArgumentException();
         }
@@ -62,8 +62,7 @@ public class CsvProductParser implements ProductParser {
 
         List<Product> products = new ArrayList<>();
 
-        try (CSVParser parser = CSVParser.parse(inputStream, StandardCharsets.UTF_8, CSVFormat.EXCEL);){
-
+        try(CSVParser parser = CSVParser.parse(inputStream, StandardCharsets.UTF_8, CSVFormat.EXCEL);) {
             List<CSVRecord> csvRecords = parser.getRecords();
             for(int i=1; i<csvRecords.size(); i++){
 
@@ -102,7 +101,7 @@ public class CsvProductParser implements ProductParser {
 
     @Override
     public void close() throws IOException {
-        //inputStream 객체가 존재하면 close() method를 호출해서 자원을 해지 합니다.
+        //inputStream 객체가 존재하면 close() method를 호출해서 자원을 해제합니다.
         if(Objects.nonNull(inputStream)){
             inputStream.close();
         }

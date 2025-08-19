@@ -29,14 +29,14 @@ class CsvProductParserTest {
     public static ProductParser productParser;
     @BeforeAll
     static void beforeSetUp(){
-        //@BeforeAll은 CsvProductParserTest에서 테스트 시작전 한 번 실행 됩니다.
-        //CsvProductParser 객체를 생성 합니다.
+        //@BeforeAll은 CsvProductParserTest에서 테스트 시작 전 한 번 실행됩니다.
+        //CsvProductParser 객체를 생성합니다.
         productParser = new CsvProductParser();
     }
     @AfterAll
     static void tearDown() throws IOException {
-        //@AfterAll은 CsvProductParserTest 테스트 종료 시점에 한 번 실행 됩니다.
-        //CsvProductParserTest 종료되면 productParser.close()를 호출하여 자원을 해지 합니다.
+        //@AfterAll은 CsvProductParserTest 테스트 종료 시점에 한 번 실행됩니다.
+        //CsvProductParserTest 종료되면 productParser.close()를 호출하여 자원을 해제합니다.
         if(Objects.nonNull(productParser)){
             productParser.close();
         }
@@ -53,7 +53,7 @@ class CsvProductParserTest {
     @Order(2)
     @DisplayName("inputStream is null")
     void constructorTest2(){
-        //CsvProductParser 객체를 생성시 inputstream == null 이면 IllegalArgumentException이 발생하는지 검증 합니다.
+        //CsvProductParser 객체를 생성 시 inputstream == null이면 IllegalArgumentException이 발생하는지 검증합니다.
         Assertions.assertThrows(IllegalArgumentException.class,()->{
            new CsvProductParser(null);
         });
@@ -84,7 +84,7 @@ class CsvProductParserTest {
             log.debug("product:{}",product);
         }
 
-        //actual 과 excepted 일치 하는지 검증 합니다.
+        //actual과 excepted가 일치하는지 검증합니다.
         Assertions.assertEquals(excepted, actual);
     }
 }
