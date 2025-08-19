@@ -131,14 +131,14 @@ class ProductTest {
     @Test
     @Order(10)
     void setQuantity() {
-        //TODO#6-1-13 product의 quantity를 50으로 변경하고, 검증 합니다.
+        //TODO#6-1-13 product의 quantity를 50으로 변경하고, 검증합니다.
 
     }
 
     @Test
     @Order(11)
     void setQuantity_negativeParam(){
-        //TODO#6-1-14 product의 quantity를 -1으로 변경하고, IllegalArgumentException 발생하는지 검증 합니다.
+        //TODO#6-1-14 product의 quantity를 -1으로 변경하고, IllegalArgumentException 발생하는지 검증합니다.
 
     }
 }

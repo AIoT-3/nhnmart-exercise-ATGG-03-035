@@ -92,13 +92,13 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
-        //TODO#6-1-10 qunatity 수정, quantity < 0 이면 IllegalArgumentException 발생
+        //TODO#6-1-10 quantity 수정, quantity < 0이면 IllegalArgumentException 발생
 
 
         this.quantity = quantity;
     }
 
-    //TODO#6-1-11 equals를 구현 합니다.
+    //TODO#6-1-11 equals를 구현합니다.
     @Override
     public boolean equals(Object o) {
 

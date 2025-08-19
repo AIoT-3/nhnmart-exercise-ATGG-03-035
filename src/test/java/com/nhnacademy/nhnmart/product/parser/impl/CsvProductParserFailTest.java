@@ -27,10 +27,10 @@ public class CsvProductParserFailTest {
     @DisplayName("product_data_fail.csv price {int->bigint} 변경")
     void parcingFailTest() throws IOException {
 
-        /*TODO#6-2-10 /test/resources/product_data_fail.csv 파일을 기준으로 parcing 합니다.
-           - 제품의 가격이 99000000000000000000000000000000 파싱에 실패 합니다.
-           - CsvParsingException.class 예외가 발생할 수 있도록 검증 합니다.
-           - ProductParser의 getProductsStream()를 참고 합니다.
+        /*TODO#6-2-10 /test/resources/product_data_fail.csv 파일을 기준으로 parsing합니다.
+           - 제품의 가격이 99000000000000000000000000000000 파싱에 실패합니다.
+           - CsvParsingException.class 예외가 발생할 수 있도록 검증합니다.
+           - ProductParser의 getProductsStream()를 참고합니다.
 
             default InputStream getProductsStream(){
                 return this.getClass()

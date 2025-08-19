@@ -46,7 +46,7 @@ class ProductServiceImplTest {
     @Order(1)
     @DisplayName("instance of ProductService")
     void constructorTest1(){
-        //TODO#6-5-12 - productParser가 ProductService.class의 구현체 인지 검증 합니다.
+        //TODO#6-5-12 - productService가 ProductService.class의 구현체인지 검증합니다.
 
     }
 
@@ -54,8 +54,8 @@ class ProductServiceImplTest {
     @Order(2)
     @DisplayName("parameter null check")
     void constructorTest2(){
-        /*TODO#6-5-13 - ProductServiceImpl 생성할 때 parameter {productRepository, productParser} 가 null 이면 IllegalArgumentException 이 발생 하는지 검증 합니다.
-            - Assertions.assertAll() 이용하여 검증 합니다.
+                 /*TODO#6-5-13 - ProductServiceImpl 생성할 때 parameter {productRepository, productParser}가 null이면 IllegalArgumentException이 발생하는지 검증합니다.
+            - Assertions.assertAll()을 이용하여 검증합니다.
          */
     }
 
@@ -65,24 +65,24 @@ class ProductServiceImplTest {
     void getProduct() {
 
         Product excepted = new Product(1l,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100);
-        // productRepository가 mock 객체 임으로  findById(1l) 호출시 excepted 반환됨을 가정 합니다.
+        // productRepository가 mock 객체이므로 findById(1l) 호출 시 excepted 반환됨을 가정합니다.
         Mockito.when(productRepository.findById(anyLong())).thenReturn(Optional.of(excepted));
 
         Product actual = productService.getProduct(1l);
 
-        //TODO#6-5-14 excepted 와 actual 일치하는지 검증 합니다.
+        //TODO#6-5-14 excepted와 actual이 일치하는지 검증합니다.
 
     }
 
     @Test
     @Order(4)
-    @DisplayName("product 조회 - 재품이 존재하지 않을 때")
+    @DisplayName("product 조회 - 제품이 존재하지 않을 때")
     void getProduct_notFound() {
 
-        //productRepository.findById(1l) 호출하면 Optional.empty() 반환됨을 가정 합니다.
+        //productRepository.findById(1l) 호출하면 Optional.empty() 반환됨을 가정합니다.
         Mockito.when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        //TODO#6-5-15 id-> 1 제품이 존재하지 않다면 ProductNotFoundException 발생 하는지 검증 합니다.
+        //TODO#6-5-15 id-> 1 제품이 존재하지 않다면 ProductNotFoundException이 발생하는지 검증합니다.
 
     }
 
@@ -99,7 +99,7 @@ class ProductServiceImplTest {
         //productService.saveProduct(product)를 호출하면 productRepository.existById(1l) 1회 호출되었는지 검증 합니다.
         Mockito.verify(productRepository, Mockito.times(1)).existById(anyLong());
 
-        //TODO#6-5-16 productService.saveProduct(product)를 호출하면 productRepository.save(product)가  1회 호출 되었는지 검증하는 코드를 작성하세요
+        //TODO#6-5-16 productService.saveProduct(product)를 호출하면 productRepository.save(product)가 1회 호출되었는지 검증하는 코드를 작성하세요
 
     }
 
@@ -109,8 +109,8 @@ class ProductServiceImplTest {
     void saveProduct_ProductAlreadyExistsException(){
         Mockito.doNothing().when(productRepository).save(any(Product.class));
 
-        /*TODO#6-5-17  productRepository.existById()를 호출하면 true 반환 되도록 코드를 작성합니다.
-            - Mockito.when() 이용하여 코드를 작성 합니다.
+                 /*TODO#6-5-17 productRepository.existById()를 호출하면 true 반환되도록 코드를 작성합니다.
+            - Mockito.when()을 이용하여 코드를 작성합니다.
          */
 
 
@@ -162,7 +162,7 @@ class ProductServiceImplTest {
 
     @Test
     @Order(10)
-    @DisplayName("제품 수량 변경 - 제품이 존재하지 않을 떄")
+    @DisplayName("제품 수량 변경 - 제품이 존재하지 않을 때")
     void updateQuantity_ProductNotFoundException(){
         Mockito.when(productRepository.existById(anyLong())).thenReturn(false);
 
@@ -175,7 +175,7 @@ class ProductServiceImplTest {
 
     @Test
     @Order(11)
-    @DisplayName("제품을 장바구니에 담을 떄 : 제품의 수량 감소")
+    @DisplayName("제품을 장바구니에 담을 때 : 제품의 수량 감소")
     void pickProduct() {
 
         Product product = new Product(1l,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,5);
@@ -191,7 +191,7 @@ class ProductServiceImplTest {
 
     @Test
     @Order(12)
-    @DisplayName("제품을 장바구니에 담을 때 : 제품의 수량이 부족할 떄")
+    @DisplayName("제품을 장바구니에 담을 때 : 제품의 수량이 부족할 때")
     void pickProduct_OutOfStockException(){
         Product product = new Product(1l,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,5);
 
@@ -214,7 +214,7 @@ class ProductServiceImplTest {
         Mockito.when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
         Mockito.doNothing().when(productRepository).updateQuantityById(anyLong(),anyInt());
 
-        //TODO#6-5-18  productService.returnProduct() 호출 하여 매대에 제품을 반납 합니다. 반납된 제품의 수량이 정확히 계산 되었는지 검증하는 코드를 작성 하세요
+        //TODO#6-5-18 productService.returnProduct()를 호출하여 매대에 제품을 반납합니다. 반납된 제품의 수량이 정확히 계산되었는지 검증하는 코드를 작성하세요
 
 
     }
