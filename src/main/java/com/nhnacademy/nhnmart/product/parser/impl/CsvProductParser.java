@@ -62,9 +62,8 @@ public class CsvProductParser implements ProductParser {
 
         List<Product> products = new ArrayList<>();
 
-        try {
+        try (CSVParser parser = CSVParser.parse(inputStream, StandardCharsets.UTF_8, CSVFormat.EXCEL);){
 
-            CSVParser parser = CSVParser.parse(inputStream, StandardCharsets.UTF_8, CSVFormat.EXCEL);
             List<CSVRecord> csvRecords = parser.getRecords();
             for(int i=1; i<csvRecords.size(); i++){
 
