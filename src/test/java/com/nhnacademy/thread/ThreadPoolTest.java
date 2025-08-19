@@ -70,7 +70,7 @@ class ThreadPoolTest {
         Try<Object> readFieldValue = ReflectionUtils.tryToReadFieldValue(ThreadPool.class, "threadList",threadPool);
         List<Thread> threadList = (List<Thread>) readFieldValue.get();
 
-        //기본 생성자로 생성한  threadList poolSize가 10으로 생성되었는지 검증 합니다.
+        //기본 생성자로 생성한 threadList poolSize가 10으로 생성되었는지 검증합니다.
         Assertions.assertEquals(10,threadList.size());
     }
 
@@ -85,7 +85,7 @@ class ThreadPoolTest {
         int aliveCount = 0;
 
 
-        //threadList의 각각의 thread가 isAlive()면 aliveCount++ 될 수 있또록 구현
+        //threadList의 각각의 thread가 isAlive()면 aliveCount++ 될 수 있도록 구현
         for(Thread thread : threadList){
             if(thread.isAlive()){
                 aliveCount ++;
@@ -106,7 +106,7 @@ class ThreadPoolTest {
 
         int terminatedCount = 0;
 
-        //threadList의 각각의 thread의 상태가 TERMINATED이면 terminatedCount++ 될 수 있도록 구현 합니다.
+        //threadList의 각각의 thread의 상태가 TERMINATED이면 terminatedCount++ 될 수 있도록 구현합니다.
         for(Thread thread : threadList){
             if(thread.getState().equals(Thread.State.TERMINATED)){
                 terminatedCount ++;

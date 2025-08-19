@@ -91,7 +91,7 @@ public class ThreadPool {
             }
         }
 
-        //join()를 이용해서 모든 thread가 종료될 떄 까지 대기 상태로 만듭니다.
+        //join()를 이용해서 모든 thread가 종료될 때까지 대기 상태로 만듭니다.
         for(Thread thread : threadList){
             try {
                 //join method는 해당 thread가 종료될 때 까지 현재 thread를 대기상태로 만듭니다.

@@ -118,8 +118,8 @@ class SelfCheckoutRequestTest {
         selfCheckoutRequest = new SelfCheckoutRequest(customer,cart,productService);
         selfCheckoutRequest.execute();
 
-        //TODO#9-2-7 customer의 money 부족으로 제품을 모두 반납합니다. 현제 cart에 {1l,2l} 제품이 있음으로 productService.returnProduct() 2회 호출 됩니다.
-        // Mockito.verify()이용해서 검증합니다.
+        //TODO#9-2-7 customer의 money 부족으로 제품을 모두 반납합니다. 현재 cart에 {1l,2l} 제품이 있으므로 productService.returnProduct() 2회 호출됩니다.
+        // Mockito.verify()를 이용해서 검증합니다.
 
 
     }

@@ -46,7 +46,7 @@ public class CustomerShoppingTest {
 
     @BeforeEach
     void setUp(){
-        //CustomerShoppingHandler를 테스트 하기위해서 의존관계에 있는 enteringQueue,productService,checkoutChannel mock를 생성 합니다.
+        //CustomerShoppingHandler를 테스트하기 위해서 의존관계에 있는 enteringQueue, productService, checkoutChannel mock을 생성합니다.
         enteringQueue = Mockito.mock(EnteringQueue.class);
         productService = Mockito.mock(ProductServiceImpl.class);
         checkoutChannel = Mockito.mock(RequestChannel.class);
@@ -114,7 +114,7 @@ public class CustomerShoppingTest {
 
     @Test
     @DisplayName("shopping, product-id:1 이미 장바구니에 담겨 있을 때")
-    void shopping_prdouctAlreadyExist() throws InvocationTargetException, IllegalAccessException {
+    void shopping_productAlreadyExist() throws InvocationTargetException, IllegalAccessException {
 
         CartLocal.initialize(new Customer(1l,"NHN아카데미1",100_0000));
 
@@ -140,7 +140,7 @@ public class CustomerShoppingTest {
          // - id가 1인 product는 이미 장바구니에 존재하고 있어 추가되지 않습니다.
         Assertions.assertEquals(5,productOptional.get().getQuantity());
 
-        //제품을 들어서 카트에 담는다. -> 즉 제품의 수량 감소, pickProduct()를 최소 1회 이상 실행하는지 검증 합니다.
+        //제품을 들어서 카트에 담는다. -> 즉 제품의 수량 감소, pickProduct()를 최소 1회 이상 실행하는지 검증합니다.
         Mockito.verify(productService,Mockito.atLeast(1)).pickProduct(anyLong(),anyInt());
     }
 }
