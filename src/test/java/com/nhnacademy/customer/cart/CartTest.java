@@ -54,16 +54,16 @@ class CartTest {
     }
 
     @Test
-    @DisplayName("장바구니에 제품이 이미 추가되어 있따면 - ProductAlreadyExistsException 발생")
+    @DisplayName("장바구니에 제품이 이미 추가되어 있다면 - ProductAlreadyExistsException 발생")
     void tryAddItem2() throws ProductAlreadyExistsException {
-        //TODO#2-12 DisplayName에 작성된 요구사항이 만족하도록 검증 합니다.
+        //TODO#2-12 DisplayName에 작성된 요구사항이 만족하도록 검증합니다.
 
     }
 
     @Test
     @DisplayName("Cart 비우기 - 초기화")
     void clear() {
-        //TODO#2-13 DisplayName에 작성된 요구사항이 만족 하도록 검증 합니다.
+        //TODO#2-13 DisplayName에 작성된 요구사항이 만족하도록 검증합니다.
 
     }
 

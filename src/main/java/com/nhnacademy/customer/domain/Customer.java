@@ -27,7 +27,7 @@ public class Customer {
     private int money;
 
     public Customer(long id, String name, int money) {
-        //id < 1 or name null or ""  or money <0 이면 IllegalArgumentException 이 발생 합니다.
+        //id < 1 or name null or ""  or money < 0 이면 IllegalArgumentException이 발생합니다.
         if(id<1 || StringUtils.isEmpty(name) || money < 0 ){
             throw new IllegalArgumentException();
         }
@@ -39,37 +39,37 @@ public class Customer {
     }
 
     public long getId() {
-        //method를 구현하세요, id를 반환 합니다.
+        //method를 구현하세요, id를 반환합니다.
         return id;
     }
 
     public String getName() {
-        //method를 구현하세요, name을 반환 합니다.
+        //method를 구현하세요, name을 반환합니다.
         return name;
     }
 
     public int getMoney() {
-        //method를 구현하세요, money를 반환 합니다.
+        //method를 구현하세요, money를 반환합니다.
         return money;
     }
 
     public void pay(int amount) throws InsufficientFundsException {
-        //money(회원 보유금액) < amount(결제할 금액) IllegalArgumentException이 발생 합니다.
+        //money(회원 보유금액) < amount(결제할 금액) IllegalArgumentException이 발생합니다.
         if(amount <0){
             throw new IllegalArgumentException(String.format("amount:%d", amount));
         }
-        //money(회원 보유금액) < amount(결제할 금액)이면 InsufficientFundsException 이 발생 합니다.
+        //money(회원 보유금액) < amount(결제할 금액)이면 InsufficientFundsException이 발생합니다.
         if(money < amount){
             throw new InsufficientFundsException();
         }
-        //method를 구현 합니다. money에서 amount 만큼 차감 합니다.
+        //method를 구현합니다. money에서 amount 만큼 차감합니다.
         this.money = money - amount;
         log.debug("customer: {}, pay : {}", this, amount);
     }
 
     @Override
     public String toString() {
-        //id, name, money 반환될 수 있도록 구현 합니다.
+        //id, name, money 반환될 수 있도록 구현합니다.
         return "Customer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
