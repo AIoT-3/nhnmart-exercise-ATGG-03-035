@@ -27,16 +27,16 @@ public class Customer {
     private int money;
 
     public Customer(long id, String name, int money) {
-        //TODO#1-1 id < 1 or name null or ""  or money <0 이면 IllegalArgumentException 이 발생 합니다.
+        //TODO#1-1 id < 1 or name null or "" or money < 0이면 IllegalArgumentException이 발생합니다.
 
 
-        //TODO#1-2 id,name, money를 초기화 합니다.
+        //TODO#1-2 id, name, money를 초기화합니다.
         this.id=0;
         this.name="";
     }
 
     public long getId() {
-        //TODO#1-3 method를 구현하세요, id를 반환 합니다.
+        //TODO#1-3 method를 구현하세요, id를 반환합니다.
         return 0;
     }
 
@@ -51,11 +51,11 @@ public class Customer {
     }
 
     public void pay(int amount) throws InsufficientFundsException {
-        //TODO#1-6 amount(결제할 금액) < 0  IllegalArgumentException이 발생 합니다.
+        //TODO#1-6 amount(결제할 금액) < 0 IllegalArgumentException이 발생합니다.
 
-        //TODO#1-7  money(회원 보유금액) < amount(결제할 금액)이면 InsufficientFundsException 이 발생 합니다.
+        //TODO#1-7 money(회원 보유금액) < amount(결제할 금액)이면 InsufficientFundsException이 발생합니다.
 
-        //TODO#1-8 method를 구현 합니다. money에서 amount 만큼 차감 합니다.
+        //TODO#1-8 method를 구현합니다. money에서 amount만큼 차감합니다.
 
 
         log.debug("customer: {}, pay : {}", this, amount);
@@ -63,12 +63,12 @@ public class Customer {
 
     @Override
     public String toString() {
-        //TODO#1-9 id, name, money 반환될 수 있도록 구현 합니다.
+        //TODO#1-9 id, name, money 반환될 수 있도록 구현합니다.
 
         return "";
     }
 
-    //TODO#1-10 customer객체 비교를 위해서(비교 기준은 id, name, money 일치)
+    //TODO#1-10 customer 객체 비교를 위해서(비교 기준은 id, name, money 일치)
     @Override
     public boolean equals(Object o) {
         return false;

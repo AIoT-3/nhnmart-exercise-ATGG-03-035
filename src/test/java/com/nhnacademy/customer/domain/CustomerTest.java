@@ -39,9 +39,9 @@ class CustomerTest {
 
     @Order(2)
     @Test()
-    @DisplayName("monry < 0")
-    void testConstructor3(){
-        //TODO#1-12 customer 생성시 money < 0 면 IllegalArgumentException이 발생하는지 금정 합니다.
+    @DisplayName("money < 0")
+    void testConstructor3() {
+        //TODO#1-12 customer 생성시 money < 0 면 IllegalArgumentException이 발생하는지 검증 합니다.
 
     }
 
@@ -110,7 +110,7 @@ class CustomerTest {
 
     @Order(11)
     @Test
-    @DisplayName("name, money 알치, 아이디는 불일치")
+    @DisplayName("name, money 일치, 아이디는 불일치")
     void testEquals2() {
         Customer excepted = new Customer(2l,"NHN아카데미",100_0000);
         Assertions.assertNotEquals(excepted, customer);
