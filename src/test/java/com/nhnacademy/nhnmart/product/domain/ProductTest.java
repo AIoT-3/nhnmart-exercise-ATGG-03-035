@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
 class ProductTest {
     static Product product;
-    static final long id = 1l;
+    static final long id = 1L;
     static final String item = "주방세제";
     static final String maker = "LG";
     static final String specification ="(750㎖) 자연퐁 스팀워시 레몬";
@@ -34,11 +34,11 @@ class ProductTest {
 
     @Test
     @Order(1)
-    @DisplayName("null or empty check : item,maker,specification,unit")
+    @DisplayName("null 또는 empty 체크 : item, maker, specification, unit")
     void constructorTest1(){
 
         Assertions.assertAll(
-                //null check
+                // null 체크
                 ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
                     new Product(id,null,maker,specification,unit,price,quantity);
                 }),
@@ -52,7 +52,7 @@ class ProductTest {
                     new Product(id,item,maker,specification,null,price,quantity);
                 }),
 
-                //empty check
+                // empty 체크
                 ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
                     new Product(id,"",maker,specification,unit,price,quantity);
                 }),
@@ -73,7 +73,7 @@ class ProductTest {
     @DisplayName("{ id, price, quantity } < 0 ")
     void constructorTest2(){
         Assertions.assertAll(
-                //null check
+                // null 체크
                 ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
                     new Product(-1,item,maker,specification,unit,price,quantity);
                 }),
@@ -131,14 +131,14 @@ class ProductTest {
     @Test
     @Order(10)
     void setQuantity() {
-        //TODO#6-1-13 product의 quantity를 50으로 변경하고, 검증합니다.
+        // TODO#6-1-13 Product의 quantity를 50으로 변경하고, 검증합니다.
 
     }
 
     @Test
     @Order(11)
     void setQuantity_negativeParam(){
-        //TODO#6-1-14 product의 quantity를 -1으로 변경하고, IllegalArgumentException 발생하는지 검증합니다.
+        // TODO#6-1-14 Product의 quantity를 -1으로 변경하고, IllegalArgumentException 발생하는지 검증합니다.
 
     }
 }

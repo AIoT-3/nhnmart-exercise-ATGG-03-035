@@ -32,23 +32,23 @@ import java.util.Objects;
 @Slf4j
 public class CsvProductParser implements ProductParser {
 
-    //제품의 기본 수량 = 100개
+    // 제품의 기본 수량 = 100개
     private final int DEFAULT_QUANTITY=100;
     private final InputStream inputStream;
 
     public CsvProductParser() {
-        //TODO#6-2-1 기본생성자 구현, getProductsStream()을 이용해서 inputStream을 초기화합니다.
+        // TODO#6-2-1 기본 생성자 구현, getProductsStream()을 이용해서 inputStream을 초기화합니다.
         inputStream = null;
     }
 
     public CsvProductParser(InputStream inputStream){
-        //TODO#6-2-2 inputStream parameter로 전달됩니다. 초기화합니다.
+        // TODO#6-2-2 inputStream parameter로 전달됩니다. 초기화합니다.
         this.inputStream = null;
     }
 
     @Override
     public List<Product> parse() {
-        /* TODO#6-2-3 parse() method를 구현하세요
+        /* TODO#6-2-3 parse() 메서드를 구현하세요
             [CSV Parser]
             - https://github.com/nhnacademy-bootcamp/java-dev-settings/blob/main/docs/06.maven/02.Maven/06.pom.xml.adoc 참고합니다.
             - ProductParser interface의 getProductsStream()를 이용해서 구현합니다.
@@ -61,7 +61,7 @@ public class CsvProductParser implements ProductParser {
 
     @Override
     public void close() throws IOException {
-        //TODO#6-2-5 inputStream 객체가 존재하면 close() method를 호출해서 자원을 해제합니다.
+        // TODO#6-2-5 inputStream 객체가 존재하면 close() 메서드를 호출해서 자원을 해제합니다.
         
     }
 }

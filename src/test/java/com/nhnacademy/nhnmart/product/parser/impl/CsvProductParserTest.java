@@ -29,14 +29,14 @@ class CsvProductParserTest {
     public static ProductParser productParser;
     @BeforeAll
     static void beforeSetUp(){
-        //@BeforeAll은 CsvProductParserTest에서 테스트 시작 전 한 번 실행됩니다.
-        //TODO#6-2-6 CsvProductParser 객체를 생성합니다.
+        // @BeforeAll은 CsvProductParserTest에서 테스트 시작 전 한 번 실행됩니다.
+        // TODO#6-2-6 CsvProductParser 객체를 생성합니다.
         productParser = null;
     }
     @AfterAll
     static void tearDown() throws IOException {
-        //@AfterAll은 CsvProductParserTest 테스트 종료 시점에 한 번 실행됩니다.
-        //TODO#6-2-7 CsvProductParserTest 종료되면 productParser.close()를 호출하여 자원을 해제합니다.
+        // @AfterAll은 CsvProductParserTest 테스트 종료 시점에 한 번 실행됩니다.
+        // TODO#6-2-7 CsvProductParserTest 종료되면 productParser.close()를 호출하여 자원을 해제합니다.
 
     }
 
@@ -51,7 +51,7 @@ class CsvProductParserTest {
     @Order(2)
     @DisplayName("inputStream is null")
     void constructorTest2(){
-        //TODO#6-2-8  CsvProductParser 객체를 생성 시 inputstream == null이면 IllegalArgumentException이 발생하는지 검증합니다.
+        // TODO#6-2-8 CsvProductParser 객체 생성 시 inputStream == null이면 IllegalArgumentException이 발생하는지 검증합니다.
 
     }
 
@@ -69,18 +69,18 @@ class CsvProductParserTest {
     void parse() {
 
         List<Product> excepted = new ArrayList<>(5);
-        excepted.add(new Product(1l,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100));
-        excepted.add(new Product(2l,"주방세제","헨켈","(750㎖) 프릴 베이킹소다 퓨어레몬","개",8900,100));
-        excepted.add(new Product(3l,"주방세제","LG","(490㎖) 자연퐁POP 솔잎","개",5300,100));
-        excepted.add(new Product(4l,"키친타올","유한","크리넥스 150매×6","개",8600,100));
-        excepted.add(new Product(5l,"행주","유한","향균 블루 행주 타올 45매×4","개",10400,100));
+        excepted.add(new Product(1L,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100));
+        excepted.add(new Product(2L,"주방세제","헨켈","(750㎖) 프릴 베이킹소다 퓨어레몬","개",8900,100));
+        excepted.add(new Product(3L,"주방세제","LG","(490㎖) 자연퐁POP 솔잎","개",5300,100));
+        excepted.add(new Product(4L,"키친타올","유한","크리넥스 150매×6","개",8600,100));
+        excepted.add(new Product(5L,"행주","유한","향균 블루 행주 타올 45매×4","개",10400,100));
 
         List<Product> actual = productParser.parse();
         for(Product product : actual){
             log.debug("product:{}",product);
         }
 
-        //TODO#6-2-9 actual과 excepted 일치하는지 검증합니다.
+        // TODO#6-2-9 actual과 excepted가 일치하는지 검증합니다.
 
     }
 }

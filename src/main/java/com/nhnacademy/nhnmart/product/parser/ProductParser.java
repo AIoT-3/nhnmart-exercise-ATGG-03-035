@@ -20,8 +20,8 @@ import java.io.InputStream;
 import java.util.List;
 
 /*
-     TODO-NOTE#6-13 ProductParser 인터페이스 입니다.
-     - /src/main/resources/product_data.csv 파일을 파싱 합니다.
+     TODO-NOTE#6-13 ProductParser 인터페이스입니다.
+     - /src/main/resources/product_data.csv 파일을 파싱합니다.
 */
 public interface ProductParser extends Closeable {
     String PRODUCTS_DATA= "product_data.csv";

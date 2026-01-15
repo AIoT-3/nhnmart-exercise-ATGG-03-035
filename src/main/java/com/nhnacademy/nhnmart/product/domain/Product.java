@@ -17,36 +17,36 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 /**
- * mart에서 판매되는 제품
+ * Mart에서 판매되는 제품
  */
 public class Product {
 
-    //product-id
+    // Product ID
     private final long id;
 
-    //품목
+    // 품목
     private final String item;
 
-    //메이커
+    // 메이커
     private final String maker;
 
-    //스펙
+    // 스펙
     private final String specification;
 
-    //단위
+    // 단위
     private final String unit;
 
-    //가격
+    // 가격
     private final int price;
 
-    //수량
+    // 수량
     private int quantity;
 
     public Product(long id, String item, String maker, String specification, String unit, int price, int quantity) {
-        //TODO#6-1-1 product 생성자의 parameter 검증을 통과하지 못한다면 IllegalArgumentException이 발생 됩니다.
+        // TODO#6-1-1 Product 생성자의 parameter 검증을 통과하지 못한다면 IllegalArgumentException이 발생합니다.
 
 
-        //TODO#6-1-2 product attribute를 초기화 합니다.
+        // TODO#6-1-2 Product attribute를 초기화합니다.
         this.id = 0;
         this.item = null;
         this.maker = null;
@@ -57,55 +57,55 @@ public class Product {
     }
 
     public long getId() {
-        //TODO#6-1-3 product id 반환
-        return 0l;
+        // TODO#6-1-3 Product ID 반환
+        return 0L;
     }
 
     public String getItem() {
-        //TODO#6-1-4 item 반환
+        // TODO#6-1-4 item 반환
         return null;
     }
 
     public String getMaker() {
-        //TODO#6-1-5 maker 반환
+        // TODO#6-1-5 maker 반환
         return null;
     }
 
     public String getSpecification() {
-        //TODO#6-1-6 specification 반환
+        // TODO#6-1-6 specification 반환
         return null;
     }
 
     public String getUnit() {
-        //TODO#6-1-7 unit 반환
+        // TODO#6-1-7 unit 반환
         return null;
     }
 
     public int getPrice() {
-        //TODO#6-1-8 price 반환
+        // TODO#6-1-8 price 반환
         return 0;
     }
 
     public int getQuantity() {
-        //TODO#6-1-9 quantity 반환
+        // TODO#6-1-9 quantity 반환
         return 0;
     }
 
     public void setQuantity(int quantity) {
-        //TODO#6-1-10 quantity 수정, quantity < 0이면 IllegalArgumentException 발생
+        // TODO#6-1-10 quantity 수정, quantity < 0이면 IllegalArgumentException 발생
 
 
         this.quantity = quantity;
     }
 
-    //TODO#6-1-11 equals를 구현합니다.
+    // TODO#6-1-11 equals를 구현합니다.
     @Override
     public boolean equals(Object o) {
 
         return false;
     }
 
-    //TODO#6-1-12 hashCode를 구현합니다.
+    // TODO#6-1-12 hashCode를 구현합니다.
     @Override
     public int hashCode() {
         return 0;
