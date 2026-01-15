@@ -71,7 +71,7 @@ public class CustomerShoppingHandler implements Runnable {
                 //enteringQueue(입장 대기열) 부터 입장시킬 고객 얻기
                 Customer customer = null;
 
-                //CartLocal CartLocal.initialize() 호출하여 초기화 합니다.
+                //TODO#9-1-3 CartLocal.initialize() 호출하여 초기화 합니다.
 
 
 
@@ -115,12 +115,12 @@ public class CustomerShoppingHandler implements Runnable {
             Product product = productService.getProduct(productId);
             int buyCount = getBuyCountByRand();
 
-            //구매 수량보다 제품의 수량이 부족하다면 해당 제품은 카트에 담지 않습니다, if 조건을 변경하세요.
+            //TODO#9-1-6 구매 수량보다 제품의 수량이 부족하다면 해당 제품은 카트에 담지 않습니다, if 조건을 변경하세요.
             if(true){
                 continue;
             }
 
-            //장바구니에 cartItem을 추가 합니다. productService.pickProduct() 호출 후 추가한 제품의 수량을 감산 합니다.
+            //TODO#9-1-6 장바구니에 cartItem을 추가 합니다. productService.pickProduct() 호출 후 추가한 제품의 수량을 감산 합니다.
             //추가하는 과정에서 Exception이 발생하면 log.debug()를 이용해서 로그를 작성 합니다.
 
         }

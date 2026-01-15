@@ -25,7 +25,7 @@ class RequestHandlerTest {
     @Test
     @DisplayName("RequestChannel = null")
     void constructorTest(){
-        //RequestHandler 객체생성시 channel이 null 이면 IllegalArgumentException 발생하는지 검증합니다.
+        // RequestHandler 객체 생성 시 channel이 null이면 IllegalArgumentException이 발생하는지 검증합니다.
         Assertions.assertThrows(IllegalArgumentException.class,()->{
            new RequestHandler(null);
         });
@@ -34,13 +34,13 @@ class RequestHandlerTest {
     @Test
     @DisplayName("producer & consumer")
     void run(){
-        //requestChannel과 requestHandler 객체를 생성합니다.
+        // requestChannel과 requestHandler 객체를 생성합니다.
         RequestChannel requestChannel = new RequestChannel();
         RequestHandler requestHandler = new RequestHandler(requestChannel);
 
         AtomicInteger counter = new AtomicInteger();
 
-        //couter.incrementAndGet(); 호출하는 countExecutable 구현 합니다.
+        // counter.incrementAndGet()을 호출하는 countExecutable을 구현합니다.
         Executable countExecutable = new Executable() {
             @Override
             public void execute() throws InterruptedException {
@@ -49,7 +49,7 @@ class RequestHandlerTest {
             }
         };
 
-        //생산자 requestChannel 실행할 작업을 1초에 한 번씩 총 5회 추가 합니다.
+        // 생산자가 requestChannel에 실행할 작업을 1초에 한 번씩 총 5회 추가합니다.
         Thread producer = new Thread(()->{
             for(int i=1; i<=5; i++){
                 try {
@@ -62,11 +62,11 @@ class RequestHandlerTest {
         });
         producer.start();
 
-        //requestHandler를 이용해서 consumer thread를 생성하고 실행 합니다.
+        // requestHandler를 이용해서 consumer Thread를 생성하고 실행합니다.
         Thread consumer= new Thread(requestHandler);
         consumer.start();
 
-        //producer(생산자)의 작업이 끝나지 않았다면 테스트를 싱행하는 main Thread는 양보(대기) 합니다.
+        // producer(생산자)의 작업이 끝나지 않았다면 테스트를 실행하는 main Thread는 양보(대기)합니다.
         while (producer.isAlive()){
             Thread.yield();
         }

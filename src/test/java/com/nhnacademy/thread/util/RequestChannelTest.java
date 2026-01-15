@@ -27,31 +27,31 @@ import static org.junit.jupiter.api.Assertions.*;
 class RequestChannelTest {
 
     @Test
-    @DisplayName("default queueSize : 10")
+    @DisplayName("기본 queueSize : 10")
     void constructorTest1() throws Exception {
         RequestChannel requestChannel = new RequestChannel();
 
         Try<Object> readFieldValue = ReflectionUtils.tryToReadFieldValue(RequestChannel.class, "queueSize", requestChannel);
         long queueSize = (long) readFieldValue.get();
 
-        //기본 생성자를 이용해서 생성된 requestChannel의 queueSize가 10인지 검증 합니다.
+        // 기본 생성자를 이용해서 생성된 requestChannel의 queueSize가 10인지 검증합니다.
         Assertions.assertEquals(10, queueSize);
     }
 
     @Test
-    @DisplayName("queueSize=-5")
+    @DisplayName("queueSize = -5")
     void constructorTest2(){
-        //RequestChannel 객체 생성시 queueSize -5 이면 IllegalArgumentException 발생하는지 검증 합니다.
+        // RequestChannel 객체 생성 시 queueSize -5이면 IllegalArgumentException이 발생하는지 검증합니다.
         Assertions.assertThrows(IllegalArgumentException.class,()->{
            new RequestChannel(-5);
         });
     }
 
     @Test
-    @DisplayName("addRequest : 5 times")
+    @DisplayName("addRequest : 5번")
     void addRequest_5_times() throws Exception {
         RequestChannel requestChannel = new RequestChannel();
-        //requestChannel에 5개의 아무것도 실행하지 않는 작업을(Executable) 등록 합니다. Executable : ()->{} 사용합니다.
+        // requestChannel에 5개의 아무것도 실행하지 않는 작업(Executable)을 등록합니다. Executable : ()->{} 사용합니다.
         for(int i=1; i<=5; i ++) {
             requestChannel.addRequest(() -> {});
         }
@@ -62,12 +62,12 @@ class RequestChannelTest {
         Assertions.assertEquals(5,queue.size());
     }
     @Test
-    @DisplayName("addRequest : 11 times, waiting")
+    @DisplayName("addRequest : 11번, 대기")
     void addRequest_11tiems() throws Exception {
 
         RequestChannel requestChannel = new RequestChannel(10);
 
-        //requestChannel에 11개의 빈 작업을 등록하는 thread를 구현 하세요. 빈 작업: ()->{}
+        // requestChannel에 11개의 빈 작업을 등록하는 Thread를 구현하세요. 빈 작업: ()->{}
         Thread thread = new Thread(()->{
             for(int i=1; i<=11; i++){
                 requestChannel.addRequest(()->{});
@@ -75,11 +75,12 @@ class RequestChannelTest {
         });
 
         thread.start();
+        Thread.sleep(1000); // Thread가 실행되어 Request를 채울 시간을 줍니다.
 
         Try<Object> readFieldValue = ReflectionUtils.tryToReadFieldValue(RequestChannel.class, "requestQueue", requestChannel);
         Queue queue = (Queue) readFieldValue.get();
 
-        //requestChannel의 queueSize =10, 11번재 executable 객체를 추가할 수 없어 대기 함니다.
+        // requestChannel의 queueSize = 10, 11번째 executable 객체를 추가할 수 없어 대기합니다.
         log.debug("queueSize:{}",queue.size());
         Assertions.assertEquals(10,queue.size());
 
@@ -87,13 +88,13 @@ class RequestChannelTest {
     }
 
     @Test
-    @DisplayName("getRequest, from queue(size:5)")
+    @DisplayName("getRequest, Queue로부터 (size:5)")
     void getRequest() throws Exception {
         RequestChannel requestChannel = new RequestChannel(10);
         for(int i=1; i<=5; i++){
             requestChannel.addRequest(()->{});
         }
-        //requestChannel 작업을 할당 받아 실행 하세요.
+        // requestChannel 작업을 할당받아 실행하세요.
         Executable executable = requestChannel.getRequest();
         executable.execute();
 
@@ -106,7 +107,7 @@ class RequestChannelTest {
     }
 
     @Test
-    @DisplayName("getRequest from empty queue")
+    @DisplayName("빈 Queue로부터 getRequest")
     void getRequest_from_empty_queue() throws InterruptedException {
         RequestChannel requestChannel = new RequestChannel(10);
 
@@ -120,7 +121,7 @@ class RequestChannelTest {
 
         log.debug("{} : {}", thread.getName(),thread.getState());
 
-        //thread의 상태가 WAITING 상태인지 검증 합니다.
+        // Thread의 상태가 WAITING 상태인지 검증합니다.
         Assertions.assertEquals(Thread.State.WAITING, thread.getState());
 
         thread.interrupt();

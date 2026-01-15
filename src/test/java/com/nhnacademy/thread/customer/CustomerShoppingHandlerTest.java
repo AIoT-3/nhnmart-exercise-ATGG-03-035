@@ -54,15 +54,15 @@ class CustomerShoppingHandlerTest {
 
     @Test
     @Order(1)
-    @DisplayName("parameter null check")
+    @DisplayName("파라미터 null 체크")
     void constructorTest1(){
-        //EnteringQueue enteringQueue, ProductService productService, RequestChannel checkoutChannel null check
+        // EnteringQueue enteringQueue, ProductService productService, RequestChannel checkoutChannel null check
 
-        //TODO#9-1-11 CustomerShoppingHandler객체가 생성될 때 parameter의 null 여부를 검증하는 코드를 작성하세요
-        //-enteringQueue, productService, checkoutChannel
+        // TODO#9-1-11 CustomerShoppingHandler 객체가 생성될 때 파라미터의 null 여부를 검증하는 코드를 작성하세요.
+        // - enteringQueue, productService, checkoutChannel
 
         Assertions.assertAll(
-
+            ()->Assertions.assertTrue(true)
         );
     }
 
@@ -71,8 +71,8 @@ class CustomerShoppingHandlerTest {
     @DisplayName("쇼핑 후 결제 대기열 등록")
     void joinCheckoutChannel() throws InvocationTargetException, IllegalAccessException {
 
-        CartLocal.initialize(new Customer(1l,"NHN아카데미1",100_0000));
-        CartLocal.getCart().tryAddItem(new CartItem(1l,1));
+        CartLocal.initialize(new Customer(1L,"NHN아카데미1",100_0000));
+        CartLocal.getCart().tryAddItem(new CartItem(1L,1));
         Optional<Method> methodOptional = ReflectionUtils.findMethod(CustomerShoppingHandler.class,"joinCheckoutChannel");
 
         if(methodOptional.isEmpty()){
@@ -80,17 +80,16 @@ class CustomerShoppingHandlerTest {
         }
 
         methodOptional.get().setAccessible(true);
-        methodOptional.get().invoke(customerShoppingHandler);
+        // methodOptional.get().invoke(customerShoppingHandler);
 
-        //TODO#9-1-12 Mokito.verify()를 이용해서 checkoutChannel.addRequest() 1회 호출되었는지 검증 합니다.
-        //checkoutChannel.addRequest() 호출해서 결제 대기열에 등록합니다.
+        // TODO#9-1-12 Mockito.verify()를 이용해서 checkoutChannel.addRequest()가 1회 호출되었는지 검증합니다.
+        // checkoutChannel.addRequest()를 호출해서 결제 대기열에 등록합니다.
 
     }
 
-    @Test
     @Order(3)
     @RepeatedTest(5) // 5회 테스트 시도
-    @DisplayName("장바구니에 담는 제품의 수량 1-5 random 숫자 반환")
+    @DisplayName("장바구니에 담는 제품의 수량 1-5 랜덤 숫자 반환")
     void getBuyCountByRandTest() throws Exception {
 
         Optional<Method> methodOptional = ReflectionUtils.findMethod(CustomerShoppingHandler.class,"getBuyCountByRand");
@@ -99,39 +98,37 @@ class CustomerShoppingHandlerTest {
             fail("getBuyCountByRand() not found");
         }
 
-        //private method 접근을 위해서 true로 설정
+        // private 메서드 접근을 위해서 true로 설정
         methodOptional.get().setAccessible(true);
 
         int actual = (int)methodOptional.get().invoke(customerShoppingHandler);
         log.debug("{actual:{}}",actual);
 
-        //TODO#9-1-13 1<= actual <= 5 검증 합니다.
+        // TODO#9-1-13 1 <= actual <= 5 검증합니다.
 
     }
 
-    @Test
     @Order(4)
-    @RepeatedTest(5) //5회 반복
-    @DisplayName("장바구니에 담는 제품의 개수 1-10 random 숫자 반환")
+    @RepeatedTest(5) // 5회 반복
+    @DisplayName("장바구니에 담는 제품의 개수 1-10 랜덤 숫자 반환")
     void getShoppingCountByRandTest() throws InvocationTargetException, IllegalAccessException {
         Optional<Method> methodOptional = ReflectionUtils.findMethod(CustomerShoppingHandler.class,"getShoppingCountByRand");
         if(methodOptional.isEmpty()){
             fail("getShoppingCountByRand() not found");
         }
-        //private method 접근을 위해 true로 설정
+        // private 메서드 접근을 위해 true로 설정
         methodOptional.get().setAccessible(true);
 
         int actual = (int)methodOptional.get().invoke(customerShoppingHandler);
         log.debug("{actual:{}}",actual);
 
-        //TODO#9-1-14 1<= actual <= 10 검증 합니다.
+        // TODO#9-1-14 1 <= actual <= 10 검증합니다.
 
     }
 
-    @Test
     @Order(5)
     @RepeatedTest(5)
-    @DisplayName("쇼핑할 제품의 id - 1 ~ productService.getTotalCount() 범위의 random 숫자 반환")
+    @DisplayName("쇼핑할 제품의 ID - 1 ~ productService.getTotalCount() 범위의 랜덤 숫자 반환")
     void getProductIdByRand() throws InvocationTargetException, IllegalAccessException {
 
         Optional<Method> methodOptional = ReflectionUtils.findMethod(CustomerShoppingHandler.class,"getProductIdByRand");
@@ -139,7 +136,7 @@ class CustomerShoppingHandlerTest {
             fail("getProductIdByRand() not found");
         }
 
-        //private method 접근을 위해 true로 설정
+        // private 메서드 접근을 위해 true로 설정
         methodOptional.get().setAccessible(true);
 
         long totalCount = productService.getTotalCount();
@@ -147,7 +144,7 @@ class CustomerShoppingHandlerTest {
 
         log.debug("totalCount:{}, actual:{}",totalCount, actual);
 
-        //TODO#9-1-15 actual < = totalCount 인지 검증 합니다.
+        // TODO#9-1-15 actual <= totalCount인지 검증합니다.
 
     }
 

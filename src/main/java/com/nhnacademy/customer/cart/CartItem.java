@@ -17,33 +17,33 @@ import java.util.Objects;
 
 public class CartItem implements Serializable {
 
-    //제품 아이디
+    // 제품 ID
     private final long productId;
-    //제품 수량
+    // 제품 수량
     private final int quantity;
 
     public CartItem(long productId, int quantity) {
-        //productId < 0 or quantity<0 IllegalArgumentException이 발생 합니다.
+        // productId < 0 또는 quantity < 0이면 IllegalArgumentException이 발생합니다.
         if(productId<0 || quantity <0){
             throw new IllegalArgumentException("productId > 0");
         }
 
-        //productId, quantity 를 초기화 합니다.
+        // productId, quantity를 초기화합니다.
         this.productId = productId;
         this.quantity = quantity;
     }
 
     public long getProductId() {
-        //productId 반환 합니다.
+        // productId를 반환합니다.
         return productId;
     }
 
     public int getQuantity() {
-        //quantity를 반환 합니다.
+        // quantity를 반환합니다.
         return quantity;
     }
 
-    //(projectId, quantity)를 기준으로 객체 비교를 하기 위해서 equals() 구현
+    // (productId, quantity)를 기준으로 객체 비교를 하기 위해서 equals() 구현
 
     @Override
     public boolean equals(Object o) {

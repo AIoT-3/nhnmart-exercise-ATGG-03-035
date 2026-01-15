@@ -46,9 +46,9 @@ class ThreadPoolTest {
 
     @Test
     @Order(1)
-    @DisplayName("poolsize < 0")
+    @DisplayName("poolSize < 0")
     void constructorTest1(){
-        //poolsize <0  IllegalArgumentException 발생하는지 검증 합니다.
+        // poolSize < 0이면 IllegalArgumentException이 발생하는지 검증합니다.
         Assertions.assertThrows(IllegalArgumentException.class,()->{
            new ThreadPool(-1,()->{});
         });
@@ -56,27 +56,27 @@ class ThreadPoolTest {
 
     @Test
     @Order(2)
-    @DisplayName("runnable  parameter check ")
+    @DisplayName("runnable 파라미터 체크")
     void constructorTest2(){
-        //runnable parameter null 이면 IllegalArgumentException 발생하는지 검증 합니다.
+        // runnable 파라미터가 null이면 IllegalArgumentException이 발생하는지 검증합니다.
         Assertions.assertThrows(IllegalArgumentException.class,()->{
             new ThreadPool(1,null);
         });
     }
     @Test
     @Order(3)
-    @DisplayName("thread-pool size")
+    @DisplayName("Thread-pool 사이즈")
     void constructorTest3() throws Exception {
         Try<Object> readFieldValue = ReflectionUtils.tryToReadFieldValue(ThreadPool.class, "threadList",threadPool);
         List<Thread> threadList = (List<Thread>) readFieldValue.get();
 
-        //기본 생성자로 생성한 threadList poolSize가 10으로 생성되었는지 검증합니다.
+        // 기본 생성자로 생성한 threadList의 poolSize가 10으로 생성되었는지 검증합니다.
         Assertions.assertEquals(10,threadList.size());
     }
 
     @Test
     @Order(4)
-    @DisplayName("thread start, thread Status check : alive")
+    @DisplayName("Thread 시작, Thread 상태 체크 : alive")
     void start() throws Exception {
         threadPool.start();
 
@@ -85,7 +85,7 @@ class ThreadPoolTest {
         int aliveCount = 0;
 
 
-        //threadList의 각각의 thread가 isAlive()면 aliveCount++ 될 수 있도록 구현
+        // threadList의 각각의 Thread가 isAlive()면 aliveCount++ 될 수 있도록 구현
         for(Thread thread : threadList){
             if(thread.isAlive()){
                 aliveCount ++;
@@ -97,7 +97,7 @@ class ThreadPoolTest {
 
     @Test
     @Order(5)
-    @DisplayName("thread stop, thread Status : TERMINATED")
+    @DisplayName("Thread 종료, Thread 상태 : TERMINATED")
     void stop() throws Exception {
         threadPool.stop();
 
@@ -106,7 +106,7 @@ class ThreadPoolTest {
 
         int terminatedCount = 0;
 
-        //threadList의 각각의 thread의 상태가 TERMINATED이면 terminatedCount++ 될 수 있도록 구현합니다.
+        // threadList의 각각의 Thread 상태가 TERMINATED이면 terminatedCount++ 될 수 있도록 구현합니다.
         for(Thread thread : threadList){
             if(thread.getState().equals(Thread.State.TERMINATED)){
                 terminatedCount ++;

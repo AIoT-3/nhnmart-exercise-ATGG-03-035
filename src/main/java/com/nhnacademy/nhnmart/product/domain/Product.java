@@ -21,34 +21,34 @@ import java.util.Objects;
  */
 public class Product {
 
-    //product-id
+    // product-ID
     private final long id;
 
-    //품목
+    // 품목
     private final String item;
 
-    //메이커
+    // 메이커
     private final String maker;
 
-    //스펙
+    // 스펙
     private final String specification;
 
-    //단위
+    // 단위
     private final String unit;
 
-    //가격
+    // 가격
     private final int price;
 
-    //수량
+    // 수량
     private int quantity;
 
     public Product(long id, String item, String maker, String specification, String unit, int price, int quantity) {
-        //product 생성자의 parameter 검증을 통과하지 못한다면 IllegalArgumentException이 발생 됩니다.
+        // Product 생성자의 parameter 검증을 통과하지 못한다면 IllegalArgumentException이 발생합니다.
         if( id< 0 || price < 0 || quantity < 0 || StringUtils.isEmpty(item) || StringUtils.isEmpty(maker) || StringUtils.isEmpty(specification) || StringUtils.isEmpty(unit) ){
             throw new IllegalArgumentException();
         }
 
-        //product attribute를 초기화 합니다.
+        // Product attribute를 초기화합니다.
         this.id = id;
         this.item = item;
         this.maker = maker;
@@ -59,49 +59,49 @@ public class Product {
     }
 
     public long getId() {
-        //product id 반환
+        // Product ID 반환
         return id;
     }
 
     public String getItem() {
-        //item 반환
+        // item 반환
         return item;
     }
 
     public String getMaker() {
-        //maker 반환
+        // maker 반환
         return maker;
     }
 
     public String getSpecification() {
-        //specification 반환
+        // specification 반환
         return specification;
     }
 
     public String getUnit() {
-        //unit 반환
+        // unit 반환
         return unit;
     }
 
     public int getPrice() {
-        //price 반환
+        // price 반환
         return price;
     }
 
     public int getQuantity() {
-        //quantity 반환
+        // quantity 반환
         return quantity;
     }
 
     public void setQuantity(int quantity) {
-        //qunatity 수정, quantity < 0 이면 IllegalArgumentException 발생
+        // quantity 수정, quantity < 0 이면 IllegalArgumentException 발생
         if(quantity < 0 ){
-            throw new IllegalArgumentException("quantity >=0");
+            throw new IllegalArgumentException("quantity >= 0");
         }
         this.quantity = quantity;
     }
 
-    //equals를 구현 합니다.
+    // equals를 구현합니다.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

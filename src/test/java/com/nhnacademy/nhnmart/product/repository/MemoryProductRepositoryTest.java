@@ -31,24 +31,24 @@ class MemoryProductRepositoryTest {
 
     @Test
     @Order(1)
-    @DisplayName("product 등록")
+    @DisplayName("Product 등록")
     void save() {
-        Product actual = new Product(2l,"주방세제","헨켈","(750㎖) 프릴 베이킹소다 퓨어레몬","개",8900,100);
+        Product actual = new Product(2L,"주방세제","헨켈","(750㎖) 프릴 베이킹소다 퓨어레몬","개",8900,100);
         productRepository.save(actual);
 
-        //2l 해당되는 product가 정상 등록되었는지 검증 합니다.
-        Optional<Product> exceptedOptional = productRepository.findById(2l);
+        // 2L에 해당되는 Product가 정상 등록되었는지 검증합니다.
+        Optional<Product> exceptedOptional = productRepository.findById(2L);
         Assertions.assertEquals(exceptedOptional.get(),actual);
     }
 
     @Test
     @Order(2)
-    @DisplayName("1l -> product 조회")
+    @DisplayName("1L -> Product 조회")
     void findById() {
-        Optional<Product> actualOptional = productRepository.findById(1l);
+        Optional<Product> actualOptional = productRepository.findById(1L);
         Assertions.assertAll(
-            //1l 해당되는 product의 attribute를 검증 합니다.
-            ()->Assertions.assertEquals(1l,actualOptional.get().getId()),
+            // 1L에 해당되는 Product의 attribute를 검증합니다.
+            ()->Assertions.assertEquals(1L,actualOptional.get().getId()),
             ()->Assertions.assertEquals("주방세제",actualOptional.get().getItem()),
             ()->Assertions.assertEquals("LG",actualOptional.get().getMaker()),
             ()->Assertions.assertEquals("(750㎖) 자연퐁 스팀워시 레몬",actualOptional.get().getSpecification()),
@@ -60,48 +60,47 @@ class MemoryProductRepositoryTest {
 
     @Test
     @Order(3)
-    @DisplayName("id:2 -> 삭제")
+    @DisplayName("ID:2 -> 삭제")
     void deleteById() {
-        //id : 2l 인 product 를 삭제하고 정상처리 되었는지 검증 합니다.
-
-        productRepository.deleteById(2l);
-        Assertions.assertFalse(productRepository.existById(2l));
+        // ID: 2L인 Product를 삭제하고 정상 처리되었는지 검증합니다.
+        productRepository.deleteById(2L);
+        Assertions.assertFalse(productRepository.existById(2L));
     }
 
     @Test
     @Order(4)
-    @DisplayName("product 존재여부 체크")
+    @DisplayName("Product 존재 여부 체크")
     void existById() {
-        //existById() 이용해서 제품 존재여부를 체크할 수 있도록 검증합니다.
+        // existById()를 이용해서 제품 존재 여부를 체크할 수 있도록 검증합니다.
         Assertions.assertAll(
-                ()->Assertions.assertTrue(productRepository.existById(1l)),
-                ()->Assertions.assertFalse(productRepository.existById(2l))
+                ()->Assertions.assertTrue(productRepository.existById(1L)),
+                ()->Assertions.assertFalse(productRepository.existById(2L))
         );
     }
 
     @Test
     @Order(5)
-    @DisplayName("productRepository에 등록된 전체 product count")
+    @DisplayName("ProductRepository에 등록된 전체 Product 카운트")
     void count() {
-        //count() 검증, productRepository에 등록된 전체 제품 수
-        Assertions.assertEquals(1l, productRepository.count());
+        // count() 검증, ProductRepository에 등록된 전체 제품 수
+        Assertions.assertEquals(1L, productRepository.count());
     }
 
     @Test
     @Order(6)
-    @DisplayName("특정 product의 수량")
+    @DisplayName("특정 Product의 수량")
     void countQuantityById() {
-        //countQuantityById() 검증, id:1 에 해당되는 제품수량 검증
-        Assertions.assertEquals(100,productRepository.countQuantityById(1l));
+        // countQuantityById() 검증, ID: 1에 해당되는 제품 수량 검증
+        Assertions.assertEquals(100,productRepository.countQuantityById(1L));
     }
 
     @Test
     @Order(7)
-    @DisplayName("product 수량 변경")
+    @DisplayName("Product 수량 변경")
     void updateQuantityById() {
-        //id:1 에 해당되는 product의 수량을 변경하고 변경된 결과가 반영 되었는지 검증 합니다.
+        // ID: 1에 해당되는 Product의 수량을 변경하고 변경된 결과가 반영되었는지 검증합니다.
 
-        productRepository.updateQuantityById(1l,50);
-        Assertions.assertEquals(50,productRepository.countQuantityById(1l));
+        productRepository.updateQuantityById(1L,50);
+        Assertions.assertEquals(50,productRepository.countQuantityById(1L));
     }
 }

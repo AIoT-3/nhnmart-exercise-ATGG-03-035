@@ -17,57 +17,57 @@ import java.util.Queue;
 
 public class RequestChannel {
 
-    //Executable type의 Queue
+    // Executable 타입의 Queue
     private final Queue<Executable> requestQueue;
-    //기본 Queue Size = 10
+    // 기본 Queue Size = 10
     private static final long DEFAULT_QUEUE_SIZE = 10;
-    // queue size
+    // Queue size
     private final long queueSize;
 
     public RequestChannel(){
-        //기본생성자 - DEFAULT_QUEUE_SIZE 기반으로 QUEUE를 생성 합니다.
-        this(DEFAULT_QUEUE_SIZE);
+        // TODO#8-2-1 기본생성자 - DEFAULT_QUEUE_SIZE 기반으로 Queue를 생성합니다.
+        this(0);
     }
 
     public RequestChannel(long queueSize) {
-        //queueSize<0 이면 IllegalArgumentException 발생 합니다.
-        if(queueSize<0){
-            throw new IllegalArgumentException();
-        }
+        // TODO#8-2-2 queueSize<0이면 IllegalArgumentException이 발생합니다.
 
-        //queueSize, requestQueue를 초기화 합니다.
-        this.queueSize = queueSize;
-        this.requestQueue = new LinkedList<>();
+
+        // TODO#8-2-3 queueSize, requestQueue를 초기화합니다.
+        this.queueSize = 0;
+        this.requestQueue = null;
     }
 
     public synchronized void addRequest(Executable executable){
-        //while 조건을 수정하세요.  requestQueue.size() >= queueSize 대기 합니다.
-        while(requestQueue.size() >= queueSize){
+        // TODO#8-2-4 while 조건을 수정하세요. requestQueue.size() >= queueSize이면 대기합니다.
+        while(true){
             try {
-                wait();
+                // TODO#8-2-4 wait() 호출 합니다.
+                Thread.sleep(100);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                // TODO#8-2-4 InterruptedException 발생 시 RuntimeException을 던집니다.
+
             }
         }
 
-        //requestQueue에  executable(작업) 추가하고 대기하고 있는 thread를 깨웁니다.
-        requestQueue.add(executable);
-        notifyAll();
+        // TODO#8-2-5 requestQueue에 executable(작업)을 추가하고 대기하고 있는 Thread를 깨웁니다.
+
     }
 
     public synchronized Executable getRequest(){
-        //requestQueue가 비어 있다면(작업할 것이 없다면) 대기 합니다.
-        while(requestQueue.isEmpty()){
+        // TODO#8-2-6 while 조건을 수정하세요. requestQueue가 비어 있다면 (작업할 것이 없다면) 대기합니다.
+        while(true){
             try {
-                wait();
+                // TODO#8-2-6 wait() 호출 합니다.
+                Thread.sleep(100);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                // TODO#8-2-6 InterruptedException 발생 시 RuntimeException을 던집니다.
+
             }
         }
 
-        //requestQueue에서 Executable(작업)을 반환 하고 , 대기하고 있는 thread를 깨웁 니다.
-        notifyAll();
-        return requestQueue.poll();
+        // TODO#8-2-7 requestQueue에서 Executable(작업)을 반환하고, 대기하고 있는 Thread를 깨웁니다.
+
     }
 
 }

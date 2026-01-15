@@ -49,19 +49,19 @@ class CartTest {
     }
 
     @Test
-    @DisplayName("장바구니에 제품이 이미 추가되어 있따면 - ProductAlreadyExistsException 발생")
+    @DisplayName("장바구니에 제품이 이미 추가되어 있다면 - ProductAlreadyExistsException 발생")
     void tryAddItem2() throws ProductAlreadyExistsException {
-        //DisplayName에 작성된 요구사항이 만족하도록 검증 합니다.
-        CartItem cartItem = new CartItem(1l,1);
+        // DisplayName에 작성된 요구사항이 만족하도록 검증합니다.
+        CartItem cartItem = new CartItem(1L,1);
         Assertions.assertThrows(ProductAlreadyExistsException.class,()->{
             cart.tryAddItem(cartItem);
         });
     }
 
     @Test
-    @DisplayName("Cart 비우기 - 초기화")
+    @DisplayName("장바구니 비우기 - 초기화")
     void clear() {
-        //DisplayName에 작성된 요구사항이 만족 하도록 검증 합니다.
+        // DisplayName에 작성된 요구사항이 만족하도록 검증합니다.
         cart.clear();
         int actual = cart.getCartItems().size();
         Assertions.assertEquals(0,actual);

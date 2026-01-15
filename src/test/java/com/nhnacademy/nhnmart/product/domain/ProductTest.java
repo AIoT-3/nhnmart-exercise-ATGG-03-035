@@ -34,11 +34,11 @@ class ProductTest {
 
     @Test
     @Order(1)
-    @DisplayName("null or empty check : item,maker,specification,unit")
+    @DisplayName("null 또는 empty 체크 : item, maker, specification, unit")
     void constructorTest1(){
 
         Assertions.assertAll(
-                //null check
+                // null 체크
                 ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
                     new Product(id,null,maker,specification,unit,price,quantity);
                 }),
@@ -52,7 +52,7 @@ class ProductTest {
                     new Product(id,item,maker,specification,null,price,quantity);
                 }),
 
-                //empty check
+                // empty 체크
                 ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
                     new Product(id,"",maker,specification,unit,price,quantity);
                 }),
@@ -131,7 +131,7 @@ class ProductTest {
     @Test
     @Order(10)
     void setQuantity() {
-        //product의 quantity를 50으로 변경하고, 검증 합니다.
+        // Product의 quantity를 50으로 변경하고, 검증합니다.
 
         product.setQuantity(50);
         Assertions.assertEquals(50,product.getQuantity());
@@ -140,7 +140,7 @@ class ProductTest {
     @Test
     @Order(11)
     void setQuantity_negativeParam(){
-        //product의 quantity를 -1으로 변경하고, IllegalArgumentException 발생하는지 검증 합니다.
+        // Product의 quantity를 -1으로 변경하고, IllegalArgumentException이 발생하는지 검증합니다.
         Assertions.assertThrows(IllegalArgumentException.class,()->{
             product.setQuantity(-1);
         });

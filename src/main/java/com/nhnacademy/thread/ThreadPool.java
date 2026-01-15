@@ -21,86 +21,60 @@ import java.util.Objects;
 @Slf4j
 public class ThreadPool {
 
-    //thread-pool 기본 size
+    // Thread-pool 기본 size
     private static final int DEFAULT_POOL_SIZE = 10;
 
-    //thread pool size
+    // Thread pool size
     private final int poolSize;
 
-    //thread에 의해서 실행될 Runnable 구현체
+    // Thread에 의해서 실행될 Runnable 구현체
     private final Runnable runnable;
 
-    //thread-pool에 생성된 thread list
+    // Thread-pool에 생성된 Thread 리스트
     private final List<Thread> threadList;
 
     public ThreadPool(Runnable runnable){
-        //default 생성자 구현, poolSize = DEFAULT_POOL_SIZE를 사용합니다.
-        this(DEFAULT_POOL_SIZE,runnable);
+        // TODO#8-1-1 default 생성자 구현, poolSize = DEFAULT_POOL_SIZE를 사용합니다.
+        this(0,null);
     }
 
     public ThreadPool(int poolSize, Runnable runnable) {
-        //thread pool size <0 다면 IllegalArgumentException이 발생 합니다.
-        if(poolSize<0){
-            throw new IllegalArgumentException();
-        }
+        // TODO#8-1-2 thread pool size <0 다면 IllegalArgumentException이 발생 합니다.
 
-        //runable == null 이면 IllegalArgumentException 발생 합니다.
-        if(Objects.isNull(runnable)){
-            throw new IllegalArgumentException();
-        }
 
-        //runnable 이 Runnable의 구현체가 아니라면 IllegalArgumentException 발생 합니다.
-        if(!(runnable instanceof Runnable)){
-            throw new IllegalArgumentException();
-        }
+        // TODO#8-1-3 runable == null 이면 IllegalArgumentException이 발생 합니다.
 
-        //poolSize, runnable, threadList 초기화
-        this.poolSize = poolSize;
-        this.runnable = runnable;
-        threadList = new ArrayList<>(poolSize);
 
-        //thread를 미리 poolSize만큼 생성 합니다.
-        createThread();
+        // TODO#8-1-4 runnable 이 Runnable의 구현체가 아니라면 IllegalArgumentException이 발생 합니다.
+
+
+        // TODO#8-1-5 poolSize, runnable, threadList 초기화
+        this.poolSize = 0;
+        this.runnable = null;
+        threadList = null;
+
+        // TODO#8-1-6 createThread() 호출 합니다.
     }
 
     private void createThread(){
-        synchronized (this) {
-            for (int i = 0; i < poolSize; i++) {
-                threadList.add(new Thread(runnable));
-            }
-        }
+        /*TODO#8-1-6 thread 생성
+          - synchronized를 이용해서 동기화 합니다.
+          - poolSize만큼 thread를 생성하고 threadList에 추가 합니다.
+         */
     }
 
     public synchronized void start(){
-        /*생성된 thread를 시작 합니다.*/
-        for(int i=0; i<poolSize; i++){
-            Thread thread = threadList.get(i);
-            thread.start();
-        }
+        // TODO#8-1-7 생성된 thread를 시작 합니다.
     }
 
     public synchronized void stop(){
-        /*interrupt()를 실행해서 thread를 종료 합니다.
-            - thread가 종료되는 과정에서 동기화 되어야 합니다.
-            - 우선 모든 thread interrupt 호출
+        /*TODO#8-1-8 interrupt()를 실행해서 thread를 종료 합니다.
+          - thread가 종료되는 과정에서 동기화 되어야 합니다.
+          - 우선 모든 thread interrupt() 호출 합니다.
          */
 
-        for(Thread thread : threadList){
-            if(Objects.nonNull(thread) && thread.isAlive() ){
-                thread.interrupt();
-            }
-        }
 
-        //join()를 이용해서 모든 thread가 종료될 때까지 대기 상태로 만듭니다.
-        for(Thread thread : threadList){
-            try {
-                //join method는 해당 thread가 종료될 때 까지 현재 thread를 대기상태로 만듭니다.
-                thread.join();
-            } catch (InterruptedException e) {
-                //join method는 InterruptedException을 발생시킬 수 있습니다.
-                Thread.currentThread().interrupt();
-                log.debug("{}",e.getMessage(),e);
-            }
-        }
+        // TODO#8-1-9 join()를 이용해서 모든 thread가 종료 될 때 까지 대기 상태로 만듭니다.
+
     }
 }

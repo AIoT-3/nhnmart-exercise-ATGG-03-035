@@ -21,27 +21,27 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 회원생성 후 대기열에 등록 합니다.
+ * 회원 생성 후 대기열에 등록합니다.
  */
 @Slf4j
 public class CustomerGenerator implements Runnable {
 
-    //NhnMart 입장 대기열
+    // NHNMart 입장 대기열
     private final EnteringQueue enteringQueue;
 
-    //회원 번호 Id 생성
+    // 회원 번호 ID 생성
     private final AtomicLong atomicId;
 
-    //회원이 보유한 default money
+    // 회원이 보유한 기본 금액
     private final static int DEFAULT_MONEY=100_0000;
 
     public CustomerGenerator(EnteringQueue enteringQueue) {
-        //enteringQueue null 이면 'IllegalArgumentException' 발생하는지 검증 합니다.
+        // enteringQueue가 null이면 'IllegalArgumentException'이 발생하는지 검증합니다.
         if(Objects.isNull(enteringQueue)){
             throw new IllegalArgumentException("enteringQueue is null!");
         }
 
-        //enteringQueue, atomicId 를 0으로 초기화 합니다.
+        // enteringQueue, atomicId를 0으로 초기화합니다.
         this.enteringQueue = enteringQueue;
         atomicId=new AtomicLong(0);
 
@@ -50,12 +50,12 @@ public class CustomerGenerator implements Runnable {
     @Override
     public void run() {
 
-        /*generate() method를 이용해서 customer를 생성하고 enteringQueue에 등록 합니다.
+        /* generate() 메서드를 이용해서 Customer를 생성하고 enteringQueue에 등록합니다.
             - while 조건을 수정하세요.
         */
         while (!Thread.currentThread().isInterrupted()){
             try {
-                //1초 간격으로 회원을 entringQueue의 대기열에 등록 합니다.
+                // 1초 간격으로 회원을 enteringQueue의 대기열에 등록합니다.
                 Thread.sleep(1000);
 
                 Customer customer = generate();
@@ -69,10 +69,10 @@ public class CustomerGenerator implements Runnable {
 
     private Customer generate(){
 
-        /*Customer 객체를 생성 후 반환 합니다.
-            - customer->id 는 atomicId를 사용하여 구현
-            - 회원이름은 random으로 생성 됩니다.
-               - 회원이름 생성시 https://github.com/Devskiller/jfairy 이용해서 구현 합니다.
+        /* Customer 객체를 생성 후 반환합니다.
+            - Customer ID는 atomicId를 사용하여 구현
+            - 회원이름은 랜덤으로 생성됩니다.
+               - 회원이름 생성 시 https://github.com/Devskiller/jfairy를 이용해서 구현합니다.
          */
 
         Fairy fairy = Fairy.create();

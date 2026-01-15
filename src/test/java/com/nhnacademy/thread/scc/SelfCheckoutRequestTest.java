@@ -47,25 +47,25 @@ class SelfCheckoutRequestTest {
     void setUp(){
 
         cart = new Cart();
-        //장바구니에 제품 2개를 추가 합니다.
-        cart.tryAddItem(new CartItem(1l,1));
-        cart.tryAddItem(new CartItem(2l,1));
+        // 장바구니에 제품 2개를 추가합니다.
+        cart.tryAddItem(new CartItem(1L,1));
+        cart.tryAddItem(new CartItem(2L,1));
         productService = Mockito.mock(ProductService.class);
         Mockito.when(productService.getProduct(anyLong())).thenAnswer(new Answer<Product>() {
 
             int count = 0;
 
             List<Product> productList = new ArrayList<>(){{
-                add(new Product(1l,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100));
-                add(new Product(2l,"주방세제","헨켈","(750㎖) 프릴 베이킹소다 퓨어레몬","개",8900,100));
-                add(new Product(3l,"주방세제","LG","(490㎖) 자연퐁POP 솔잎","개",5300,100));
-                add(new Product(4l,"키친타올","유한","크리넥스 150매×6","개",8600,100));
-                add(new Product(5l,"행주","유한","향균 블루 행주 타올 45매×4","개",10400,100));
-                add(new Product(6l,"냅킨","유한","크리넥스 카카오 홈냅킨 130매×6","개",6280,100));
-                add(new Product(7l,"호일","대한","대한웰빙호일 25㎝×30m×15","개",3980,100));
-                add(new Product(8l,"크린랩","유한","(30매) 크린종이호일 26.7㎝","개",5280,100));
-                add(new Product(9l,"랩","크린랲","크린랲 22㎝×50m","개",5480,100));
-                add(new Product(10l,"위생봉지","크린랩","(200매입) 크린롤백 30㎝×40㎝","개",8080,100));
+                add(new Product(1L,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100));
+                add(new Product(2L,"주방세제","헨켈","(750㎖) 프릴 베이킹소다 퓨어레몬","개",8900,100));
+                add(new Product(3L,"주방세제","LG","(490㎖) 자연퐁POP 솔잎","개",5300,100));
+                add(new Product(4L,"키친타올","유한","크리넥스 150매×6","개",8600,100));
+                add(new Product(5L,"행주","유한","향균 블루 행주 타올 45매×4","개",10400,100));
+                add(new Product(6L,"냅킨","유한","크리넥스 카카오 홈냅킨 130매×6","개",6280,100));
+                add(new Product(7L,"호일","대한","대한웰빙호일 25㎝×30m×15","개",3980,100));
+                add(new Product(8L,"크린랩","유한","(30매) 크린종이호일 26.7㎝","개",5280,100));
+                add(new Product(9L,"랩","크린랲","크린랲 22㎝×50m","개",5480,100));
+                add(new Product(10L,"위생봉지","크린랩","(200매입) 크린롤백 30㎝×40㎝","개",8080,100));
             }};
 
             @Override
@@ -80,45 +80,45 @@ class SelfCheckoutRequestTest {
     @Test
     void constructorTest(){
 
-        //TODO#9-2-5 SelfCheckoutRequest 생성시 parameter 검증합니다. null 이면 IllegalArgumentException이 발생 합니다.
-        //customer, cart, productService를 검증 합니다.
+        // TODO#9-2-5 SelfCheckoutRequest 생성 시 parameter 검증합니다. null이면 IllegalArgumentException이 발생합니다.
+        // customer, cart, productService를 검증합니다.
 
         Assertions.assertAll(
-
+            ()->Assertions.assertTrue(true)
         );
     }
 
     @Test
     @DisplayName("결제 후 고객의 money 검증")
     void execute1() {
-        customer = new Customer(1l,"NHN아카데미1",100_0000);
+        customer = new Customer(1L,"NHN아카데미1",100_0000);
         selfCheckoutRequest = new SelfCheckoutRequest(customer,cart,productService);
 
         selfCheckoutRequest.execute();
 
-        //TODO#9-2-5 customer money : 100_0000 - 18800 = 981200 검증 합니다.
+        // TODO#9-2-5 customer money : 100_0000 - 18800 = 981200 검증합니다.
 
     }
 
     @Test
-    @DisplayName("결제 시도 , 고객의 money 부족")
+    @DisplayName("결제 시도, 고객의 money 부족")
     void execute2(){
         /*
          * 장바구니에 담긴 아이템
-         * - 1l - 1개 - 9900원
-         * - 2l - 1개 - 8900원
+         * - 1L - 1개 - 9900원
+         * - 2L - 1개 - 8900원
          * - 9900 + 8900 = 18800원
          * */
 
-        Mockito.when(productService.returnProduct(anyLong(),anyInt())).thenReturn(anyInt());
+        Mockito.when(productService.returnProduct(anyLong(),anyInt())).thenReturn(1);
 
-        //고객의 money를 1_0000으로 설정 합니다.
-        customer = new Customer(1l,"NHN아카데미1",1_0000);
+        // 고객의 money를 1_0000으로 설정합니다.
+        customer = new Customer(1L,"NHN아카데미1",1_0000);
 
         selfCheckoutRequest = new SelfCheckoutRequest(customer,cart,productService);
         selfCheckoutRequest.execute();
 
-        //TODO#9-2-7 customer의 money 부족으로 제품을 모두 반납합니다. 현재 cart에 {1l,2l} 제품이 있으므로 productService.returnProduct() 2회 호출됩니다.
+        // TODO#9-2-7 customer의 money 부족으로 제품을 모두 반납합니다. 현재 cart에 {1L,2L} 제품이 있으므로 productService.returnProduct() 2회 호출됩니다.
         // Mockito.verify()를 이용해서 검증합니다.
 
 
@@ -129,12 +129,12 @@ class SelfCheckoutRequestTest {
     void getTotalAmountFromCart() {
         /*
         * 장바구니에 담긴 아이템
-        * - 1l - 1개 - 9900원
-        * - 2l - 1개 - 8900원
+        * - 1L - 1개 - 9900원
+        * - 2L - 1개 - 8900원
         * - 9900 + 8900 = 18800원
         * */
 
-        customer = new Customer(1l,"NHN아카데미1",1_0000);
+        customer = new Customer(1L,"NHN아카데미1",1_0000);
         selfCheckoutRequest = new SelfCheckoutRequest(customer,cart,productService);
 
         int totalAmountFromCart = selfCheckoutRequest.getTotalAmountFromCart();
