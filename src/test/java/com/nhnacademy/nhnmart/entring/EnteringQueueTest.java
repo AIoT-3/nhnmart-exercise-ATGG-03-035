@@ -32,11 +32,6 @@ class EnteringQueueTest {
             1~99 고객을 생성 후 enteringQueue 대기열에 등록합니다.
          */
 
-        for (int i = 0; i < 99; i++) {
-            Customer customer = new Customer(i + 1, String.format("NHN아카데미%d", i + 1), 100_0000);
-            log.debug("{}", customer);
-            enteringQueue.addCustomer(customer);
-        }
     }
 
     @Test
