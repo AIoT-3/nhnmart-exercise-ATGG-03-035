@@ -28,34 +28,34 @@ class CustomerGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        //enteringQueue 대기열을 capacity = 5로 초기화합니다.
+        // TODO#4-6 enteringQueue 대기열을 capacity = 5로 초기화합니다.
         enteringQueue = new EnteringQueue(5);
 
-        //enteringQueue를 이용해서 customerGenerator 객체를 생성합니다.
+        // TODO#4-7 enteringQueue를 이용해서 customerGenerator 객체를 생성합니다.
         customerGenerator = new CustomerGenerator(enteringQueue);
     }
 
     @Test
     @DisplayName("enteringQueue is null")
     void constructorTest(){
-        //enteringQueue == null이면 IllegalArgumentException이 발생하는지 검증합니다.
+        // TODO#4-8 enteringQueue == null 이면 IllegalArgumentException이 발생하는지 검증합니다.
         Assertions.assertThrows(IllegalArgumentException.class,()->{
             new CustomerGenerator(null);
         });
     }
 
     @Test
-    @DisplayName("10초 동안 customer 객체가 enteringQueue 대기열 등록")
+    @DisplayName("10초 동안 Customer 객체가 enteringQueue 대기열 등록")
     void generatorTest() throws InterruptedException {
 
-        //customerGenerator를 이용해서 customerGeneratorThread 초기화하고, 실행합니다.
+        // TODO#4-9 customerGenerator를 이용해서 customerGeneratorThread를 초기화하고 실행합니다.
         Thread customerGeneratorThread = new Thread(customerGenerator);
         customerGeneratorThread.start();
 
-        //10초 대기합니다.
+        // TODO#4-10 10초 대기합니다.
         Thread.sleep(10000);
 
-        //customerGeneratorThread를 종료합니다.
+        // TODO#4-11 customerGeneratorThread를 종료합니다.
         customerGeneratorThread.interrupt();
 
         while(customerGeneratorThread.isAlive()){
@@ -63,9 +63,9 @@ class CustomerGeneratorTest {
         }
 
         Assertions.assertAll(
-                //interrupt 발생 시 customerGeneratorThread의 상태가 TERMINATED 상태인지 검증
+                // TODO#4-12 interrupt 발생 시 customerGeneratorThread의 상태가 TERMINATED 상태인지 검증
                 ()->Assertions.assertEquals(Thread.State.TERMINATED,customerGeneratorThread.getState()),
-                //enteringQueue(대기열) 최대 Queue Size가 5 <-- 10초 동안 최대 5명의 고객이 대기열에 등록되었는지 검증합니다.
+                // TODO#4-13 enteringQueue(대기열) 최대 Queue Size가 5 <-- 10초 동안 최대 5명의 고객이 대기열에 등록되었는지 검증합니다.
                 ()->Assertions.assertEquals(5, enteringQueue.getQueueSize())
         );
     }
