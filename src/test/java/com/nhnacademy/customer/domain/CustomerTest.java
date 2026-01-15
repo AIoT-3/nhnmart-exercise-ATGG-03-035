@@ -25,7 +25,7 @@ class CustomerTest {
     Customer customer;
     @BeforeEach
     void setUp(){
-        customer = new Customer(1l,"NHN아카데미",100_0000);
+        customer = new Customer(1L,"NHN아카데미",100_0000);
     }
 
     @Order(1)
@@ -33,7 +33,7 @@ class CustomerTest {
     @DisplayName("id < 0")
     void testConstructor1(){
         Assertions.assertThrows(IllegalArgumentException.class,()->{
-            customer = new Customer(-1l, "NHN아카데미",10_0000);
+            customer = new Customer(-1L, "NHN아카데미",10_0000);
         });
     }
 
@@ -41,10 +41,10 @@ class CustomerTest {
     @Test()
     @DisplayName("money < 0")
     void testConstructor3(){
-        //customer 생성시 money < 0이면 IllegalArgumentException이 발생하는지 검증합니다.
+        // Customer 생성 시 money < 0이면 IllegalArgumentException이 발생하는지 검증합니다.
 
         Assertions.assertThrows(IllegalArgumentException.class,()->{
-            customer = new Customer(1l, "NHN아카데미",-1_0000);
+            customer = new Customer(1L, "NHN아카데미",-1_0000);
         });
     }
 
@@ -52,10 +52,10 @@ class CustomerTest {
     @Test()
     @DisplayName("name is ( empty or null ) ")
     void testConstructor2(){
-        //name이 "" or null이면 IllegalArgumentException.class 예외가 발생하는지 검증합니다.
+        // name이 "" 또는 null이면 IllegalArgumentException.class 예외가 발생하는지 검증합니다.
 
         Assertions.assertThrows(IllegalArgumentException.class,()->{
-            customer = new Customer(1l, "",100_000);
+            customer = new Customer(1L, "",100_000);
         });
     }
 
@@ -63,13 +63,13 @@ class CustomerTest {
     @Test
     void getId() {
         long actual = customer.getId();
-        Assertions.assertEquals(1l, actual);
+        Assertions.assertEquals(1L, actual);
     }
 
     @Order(5)
     @Test
     void getName() {
-        //customer -> getName() 호출시 NHN아카데미 반환하는지 검증합니다.
+        // customer -> getName() 호출 시 "NHN아카데미"를 반환하는지 검증합니다.
 
         String actual = customer.getName();
         Assertions.assertEquals("NHN아카데미",actual);
@@ -104,7 +104,7 @@ class CustomerTest {
     @Test
     @DisplayName("customer money = 100만원, 200만원 결제 시도")
     void pay3(){
-        //200만원 결제시 InsufficientFundsException.class 예외가 발생하는지 검증합니다.
+        // 200만 원 결제 시 InsufficientFundsException.class 예외가 발생하는지 검증합니다.
 
         Assertions.assertThrows(InsufficientFundsException.class,()->{
             customer.pay(200_0000);

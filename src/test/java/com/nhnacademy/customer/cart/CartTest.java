@@ -33,51 +33,37 @@ class CartTest {
     @BeforeEach
     void setUp() throws ProductAlreadyExistsException {
         cart = new Cart();
-        cart.tryAddItem(new CartItem(1l,1));
+        cart.tryAddItem(new CartItem(1L, 1));
     }
 
     @Test
     @DisplayName("Serializable implements check")
     void constructorTest(){
-        Assertions.assertInstanceOf(Serializable.class,cart);
+        // TODO#2-12 Cart 객체가 Serializable을 구현했는지 검증합니다.
     }
 
     @Test
     @DisplayName("장바구니(cart)에 제품(CartItem) 추가")
     void tryAddItem1() throws ProductAlreadyExistsException {
-        CartItem cartItem = new CartItem(2l,1);
-        cart.tryAddItem(cartItem);
-        Assertions.assertAll(
-                ()-> Assertions.assertEquals(cart.getCartItems().size(), 2),
-                ()-> Assertions.assertEquals(cart.getCartItems().getLast(),cartItem)
-        );
+        // TODO#2-13 장바구니에 제품을 추가하고, 장바구니의 크기와 마지막 제품이 추가한 제품과 일치하는지 검증합니다.
     }
 
     @Test
     @DisplayName("장바구니에 제품이 이미 추가되어 있다면 - ProductAlreadyExistsException 발생")
     void tryAddItem2() throws ProductAlreadyExistsException {
-        //TODO#2-12 DisplayName에 작성된 요구사항이 만족하도록 검증합니다.
-
+        // TODO#2-14 DisplayName에 작성된 요구사항이 만족하도록 검증합니다.
     }
 
     @Test
     @DisplayName("Cart 비우기 - 초기화")
     void clear() {
-        //TODO#2-13 DisplayName에 작성된 요구사항이 만족하도록 검증합니다.
-
+        // TODO#2-15 DisplayName에 작성된 요구사항이 만족하도록 검증합니다.
     }
 
     @Test
     @DisplayName("Cart item 조회")
     void getCartItems() {
-        //productId : 2 장바구니 추가
-        cart.getCartItems().add(new CartItem(2l,1));
-
-        List<CartItem> excepted = new ArrayList<>();
-        excepted.add(new CartItem(1l,1));
-        excepted.add(new CartItem(2l,1));
-
-        Assertions.assertEquals(excepted,cart.getCartItems());
+        // TODO#2-16 장바구니에 제품을 추가한 후, getCartItems() 메서드가 예상된 목록을 반환하는지 검증합니다.
     }
 
 }
