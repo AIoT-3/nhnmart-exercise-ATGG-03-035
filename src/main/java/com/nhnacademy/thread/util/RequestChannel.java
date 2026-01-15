@@ -26,48 +26,53 @@ public class RequestChannel {
 
     public RequestChannel(){
         // TODO#8-2-1 기본생성자 - DEFAULT_QUEUE_SIZE 기반으로 Queue를 생성합니다.
-        this(0);
+        this(DEFAULT_QUEUE_SIZE);
     }
 
     public RequestChannel(long queueSize) {
         // TODO#8-2-2 queueSize<0이면 IllegalArgumentException이 발생합니다.
-
+        if (queueSize < 0) {
+            throw new IllegalArgumentException("queueSize < 0");
+        }
 
         // TODO#8-2-3 queueSize, requestQueue를 초기화합니다.
-        this.queueSize = 0;
-        this.requestQueue = null;
+        this.queueSize = queueSize;
+        this.requestQueue = new LinkedList<>();
     }
 
     public synchronized void addRequest(Executable executable){
         // TODO#8-2-4 while 조건을 수정하세요. requestQueue.size() >= queueSize이면 대기합니다.
-        while(true){
+        while(requestQueue.size() >= queueSize){
             try {
                 // TODO#8-2-4 wait() 호출 합니다.
-                Thread.sleep(100);
+                wait();
             } catch (InterruptedException e) {
                 // TODO#8-2-4 InterruptedException 발생 시 RuntimeException을 던집니다.
-
+                throw new RuntimeException(e);
             }
         }
 
         // TODO#8-2-5 requestQueue에 executable(작업)을 추가하고 대기하고 있는 Thread를 깨웁니다.
-
+        requestQueue.add(executable);
+        notifyAll();
     }
 
     public synchronized Executable getRequest(){
         // TODO#8-2-6 while 조건을 수정하세요. requestQueue가 비어 있다면 (작업할 것이 없다면) 대기합니다.
-        while(true){
+        while(requestQueue.isEmpty()){
             try {
                 // TODO#8-2-6 wait() 호출 합니다.
-                Thread.sleep(100);
+                wait();
             } catch (InterruptedException e) {
                 // TODO#8-2-6 InterruptedException 발생 시 RuntimeException을 던집니다.
-
+                throw new RuntimeException(e);
             }
         }
 
         // TODO#8-2-7 requestQueue에서 Executable(작업)을 반환하고, 대기하고 있는 Thread를 깨웁니다.
-
+        Executable executable = requestQueue.poll();
+        notifyAll();
+        return executable;
     }
 
 }
