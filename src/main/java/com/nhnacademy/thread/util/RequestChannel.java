@@ -25,37 +25,37 @@ public class RequestChannel {
     private final long queueSize;
 
     public RequestChannel(){
-        //TODO#8-2-1 기본생성자 - DEFAULT_QUEUE_SIZE 기반으로 QUEUE를 생성합니다.
+        // TODO#8-2-1 기본 생성자 - DEFAULT_QUEUE_SIZE 기반으로 Queue를 생성합니다.
         requestQueue = null;
         this.queueSize=0;
     }
 
     public RequestChannel(long queueSize) {
-        //TODO#8-2-2 queueSize<0이면 IllegalArgumentException이 발생합니다.
+        // TODO#8-2-2 queueSize < 0 이면 IllegalArgumentException이 발생합니다.
 
 
-        //TODO#8-2-3 queueSize, requestQueue를 초기화합니다.
+        // TODO#8-2-3 queueSize, requestQueue를 초기화합니다.
         this.queueSize = 0;
         this.requestQueue = null;
     }
 
     public synchronized void addRequest(Executable executable){
-        //TODO#8-2-4 while 조건을 수정하세요. requestQueue.size() >= queueSize이면 대기합니다.
+        // TODO#8-2-4 while 조건을 수정하세요. requestQueue.size() >= queueSize이면 대기합니다.
         while(true){
 
         }
 
-        //TODO#8-2-5 requestQueue에 executable(작업)을 추가하고 대기하고 있는 스레드를 깨웁니다.
+        // TODO#8-2-5 requestQueue에 executable(작업)을 추가하고 대기하고 있는 Thread를 깨웁니다.
 
     }
 
     public synchronized Executable getRequest(){
-        //TODO#8-2-6 while 조건을 수정하세요. requestQueue가 비어 있다면(작업할 것이 없다면) 대기합니다.
+        // TODO#8-2-6 while 조건을 수정하세요. requestQueue가 비어 있다면(작업할 것이 없다면) 대기합니다.
         while(true){
 
         }
 
-        //TODO#8-2-7 requestQueue에서 Executable(작업)을 반환하고, 대기하고 있는 스레드를 깨웁니다.
+        // TODO#8-2-7 requestQueue에서 Executable(작업)을 반환하고, 대기하고 있는 Thread를 깨웁니다.
 
     }
 

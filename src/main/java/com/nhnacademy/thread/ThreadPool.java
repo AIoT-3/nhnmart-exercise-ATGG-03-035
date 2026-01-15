@@ -41,52 +41,52 @@ public class ThreadPool {
     }
 
     public ThreadPool(int poolSize, Runnable runnable) {
-        //TODO#8-1-2 thread pool size <0 다면 IllegalArgumentException이 발생 합니다.
+        // TODO#8-1-2 Thread Pool Size < 0 이라면 IllegalArgumentException이 발생합니다.
 
 
-        //TODO#8-1-3 runable == null 이면 IllegalArgumentException 발생 합니다.
+        // TODO#8-1-3 runnable == null 이면 IllegalArgumentException이 발생합니다.
 
 
-        //TODO#8-1-4 runnable 이 Runnable의 구현체가 아니라면 IllegalArgumentException 발생 합니다.
+        // TODO#8-1-4 runnable이 Runnable의 구현체가 아니라면 IllegalArgumentException이 발생합니다.
 
 
-        //TODO#8-1-5 poolSize, runnable, threadList 초기화
+        // TODO#8-1-5 poolSize, runnable, threadList 초기화
         this.poolSize = poolSize;
         this.runnable = runnable;
         threadList = new ArrayList<>(poolSize);
 
-        //thread를 미리 poolSize만큼 생성 합니다.
+        // Thread를 미리 poolSize만큼 생성합니다.
         createThread();
     }
 
     private void createThread(){
-         /*TODO#8-1-6 thread 생성
-          - thread가 생성되는 과정은 동기화 되어야 합니다.
-          - mutex, semaphore, synchronized 등등.. 적절히 구현 합니다.
+         /* TODO#8-1-6 Thread 생성
+          - Thread가 생성되는 과정은 동기화되어야 합니다.
+          - mutex, semaphore, synchronized 등등.. 적절히 구현합니다.
         */
 
     }
 
     public synchronized void start(){
-        //TODO#8-1-7 생성된 thread를 시작 합니다.
+        // TODO#8-1-7 생성된 Thread를 시작합니다.
         for(int i=0; i<poolSize; i++){
-            //구현
+            // 구현
         }
     }
 
     public synchronized void stop(){
-        /*TODO#8-1-8 interrupt()를 실행해서 thread를 종료 합니다.
-            - thread가 종료되는 과정에서 동기화 되어야 합니다.
-            - 우선 모든 thread interrupt 호출
+        /* TODO#8-1-8 interrupt()를 실행해서 Thread를 종료합니다.
+            - Thread가 종료되는 과정에서 동기화되어야 합니다.
+            - 우선 모든 Thread interrupt 호출
          */
 
         for(Thread thread : threadList){
-            //구현
+            // 구현
         }
 
-        //TODO#8-1-9 join()를 이용해서 모든 thread가 종료될 떄 까지 대기 상태로 만듭니다.
+        // TODO#8-1-9 join()를 이용해서 모든 Thread가 종료될 때까지 대기 상태로 만듭니다.
         for(Thread thread : threadList){
-            //구현
+            // 구현
         }
     }
 }
