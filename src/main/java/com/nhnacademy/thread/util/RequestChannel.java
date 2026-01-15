@@ -26,8 +26,8 @@ public class RequestChannel {
 
     public RequestChannel(){
         // TODO#8-2-1 기본 생성자 - DEFAULT_QUEUE_SIZE 기반으로 Queue를 생성합니다.
-        requestQueue = null;
-        this.queueSize=0;
+        this.queueSize = 0;
+        this.requestQueue = null;
     }
 
     public RequestChannel(long queueSize) {

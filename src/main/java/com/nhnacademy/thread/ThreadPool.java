@@ -35,7 +35,7 @@ public class ThreadPool {
 
     public ThreadPool(Runnable runnable){
         //TODO#8-1-1 default 생성자 구현, poolSize = DEFAULT_POOL_SIZE를 사용합니다.
-        this.poolSize=0;
+        this.poolSize = 0;
         this.runnable = null;
         this.threadList = null;
     }
@@ -51,12 +51,9 @@ public class ThreadPool {
 
 
         // TODO#8-1-5 poolSize, runnable, threadList 초기화
-        this.poolSize = poolSize;
-        this.runnable = runnable;
-        threadList = new ArrayList<>(poolSize);
-
-        // Thread를 미리 poolSize만큼 생성합니다.
-        createThread();
+        this.poolSize = 0;
+        this.runnable = null;
+        this.threadList = null;
     }
 
     private void createThread(){
@@ -69,9 +66,7 @@ public class ThreadPool {
 
     public synchronized void start(){
         // TODO#8-1-7 생성된 Thread를 시작합니다.
-        for(int i=0; i<poolSize; i++){
-            // 구현
-        }
+
     }
 
     public synchronized void stop(){
@@ -80,13 +75,8 @@ public class ThreadPool {
             - 우선 모든 Thread interrupt 호출
          */
 
-        for(Thread thread : threadList){
-            // 구현
-        }
 
         // TODO#8-1-9 join()를 이용해서 모든 Thread가 종료될 때까지 대기 상태로 만듭니다.
-        for(Thread thread : threadList){
-            // 구현
-        }
+
     }
 }
