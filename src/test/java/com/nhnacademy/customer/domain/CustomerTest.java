@@ -18,102 +18,88 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//CustomerTest를 통과 해야 합니다.
+// CustomerTest를 통과해야 합니다.
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CustomerTest {
 
     Customer customer;
     @BeforeEach
     void setUp(){
-        customer = new Customer(1l,"NHN아카데미",100_0000);
+        customer = new Customer(1L,"NHN아카데미",100_0000);
     }
 
     @Order(1)
     @Test()
     @DisplayName("id < 0")
     void testConstructor1(){
-        Assertions.assertThrows(IllegalArgumentException.class,()->{
-            customer = new Customer(-1l, "NHN아카데미",10_0000);
-        });
+        // TODO#1-12 id < 1 이면 IllegalArgumentException이 발생하는지 검증합니다.
     }
 
     @Order(2)
     @Test()
     @DisplayName("money < 0")
     void testConstructor3() {
-        //TODO#1-12 customer 생성시 money < 0 면 IllegalArgumentException이 발생하는지 검증 합니다.
-
+        // TODO#1-13 Customer 생성 시 money < 0이면 IllegalArgumentException이 발생하는지 검증합니다.
     }
 
     @Order(3)
     @Test()
     @DisplayName("name is ( empty or null ) ")
     void testConstructor2(){
-        //TODO#1-13 - name이 "" or null 이면 IllegalArgumentException.class 예외가 발생하는지 검증 합니다.
-
+        // TODO#1-14 name이 "" 또는 null이면 IllegalArgumentException.class 예외가 발생하는지 검증합니다.
     }
 
     @Order(4)
     @Test
     void getId() {
-        long actual = customer.getId();
-        Assertions.assertEquals(1l, actual);
+        // TODO#1-15 customer -> getId() 호출 시 1L을 반환하는지 검증합니다.
     }
 
     @Order(5)
     @Test
     void getName() {
-        //TODO#1-14 customer -> getName() 호출시  NHN아카데미 반환하는지 검증 합니다.
-
+        // TODO#1-16 customer -> getName() 호출 시 "NHN아카데미"를 반환하는지 검증합니다.
     }
 
     @Order(6)
     @Test
     void getMoney() {
-        Assertions.assertEquals(100_0000,customer.getMoney());
+        // TODO#1-17 customer -> getMoney() 호출 시 100_0000을 반환하는지 검증합니다.
     }
 
     @Order(7)
     @Test
-    @DisplayName("결제 : 100_0000 - 10_00000 = 90_00000")
+    @DisplayName("결제 : 100_0000 - 10_0000 = 90_0000")
     void pay1() throws InsufficientFundsException {
-        customer.pay(10_0000);
-        int actual = customer.getMoney();
-        Assertions.assertEquals(90_0000,actual);
+        // TODO#1-18 10_0000 결제 후 보유 금액이 90_0000이 되는지 검증합니다.
     }
 
     @Order(8)
     @Test
     @DisplayName("결제 amount < 0 ")
     void pay2() throws InsufficientFundsException {
-        Assertions.assertThrows(IllegalArgumentException.class,()->{
-            customer.pay(-10_0000);
-            int actual = customer.getMoney();
-        });
+        // TODO#1-19 결제 금액이 0보다 작으면 IllegalArgumentException이 발생하는지 검증합니다.
     }
 
     @Order(9)
     @Test
     @DisplayName("customer money = 100만원, 200만원 결제 시도")
     void pay3(){
-        //TODO#1-15 200만원 결제시 InsufficientFundsException.class 예외가 발생하는지 검증 합니다.
-
+        // TODO#1-20 200만 원 결제 시 InsufficientFundsException.class 예외가 발생하는지 검증합니다.
     }
 
     @Order(10)
     @Test
-    @DisplayName("id 와 name, money이 일치하면 동일한 객체로 식별")
+    @DisplayName("id와 name, money가 일치하면 동일한 객체로 식별")
     void testEquals1() {
-        Customer excepted = new Customer(1l,"NHN아카데미",100_0000);
-        Assertions.assertEquals(excepted, customer);
+        // TODO#1-21 id, name, money가 일치하면 equals가 true를 반환하는지 검증합니다.
     }
 
     @Order(11)
     @Test
     @DisplayName("name, money 일치, 아이디는 불일치")
     void testEquals2() {
-        Customer excepted = new Customer(2l,"NHN아카데미",100_0000);
-        Assertions.assertNotEquals(excepted, customer);
+        // TODO#1-22 id가 다르면 equals가 false를 반환하는지 검증합니다.
     }
 
 }
