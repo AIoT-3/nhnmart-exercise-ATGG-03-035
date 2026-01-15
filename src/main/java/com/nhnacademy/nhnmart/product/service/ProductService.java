@@ -15,23 +15,23 @@ package com.nhnacademy.nhnmart.product.service;
 import com.nhnacademy.nhnmart.product.domain.Product;
 
 public interface ProductService {
-    //product 조회
+    // Product 조회
     Product getProduct(long id);
-    //product 등록 후 product id를 응답 한다.
+    // Product 등록 후 Product id를 응답한다.
     void saveProduct(Product product);
-    //product 삭제
+    // Product 삭제
     void deleteProduct(long id);
 
-    //전체 상품의 개수를 구합니다.
+    // 전체 상품의 개수를 구합니다.
     long getTotalCount();
 
-    //제품의 수량을 수정 한다.
+    // 제품의 수량을 수정한다.
     void updateQuantity(long id, int quantity);
 
-    //제품을 들어서 카트에 담는다.
+    // 제품을 들어서 카트에 담는다.
     void pickProduct(long id, int quantity);
 
-    //제품을 반납 합니다. 반납된 수량을 더한 수량 반환
+    // 제품을 반납합니다. 반납된 수량을 더한 수량 반환
     int returnProduct(long id, int quantity);
 
 }

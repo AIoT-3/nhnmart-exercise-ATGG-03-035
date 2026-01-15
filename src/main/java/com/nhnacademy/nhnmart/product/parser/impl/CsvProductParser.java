@@ -54,10 +54,10 @@ public class CsvProductParser implements ProductParser {
 
     @Override
     public List<Product> parse() {
-        /* parse() method를 구현하세요
+        /* parse() 메서드를 구현하세요
             [CSV Parser]
-            - https://github.com/nhnacademy-bootcamp/java-dev-settings/blob/main/docs/06.maven/02.Maven/06.pom.xml.adoc 참고 합니다.
-            - ProductParser interface의 getProductsStream()를 이용해서 구현 합니다.
+            - https://github.com/nhnacademy-bootcamp/java-dev-settings/blob/main/docs/06.maven/02.Maven/06.pom.xml.adoc 참고합니다.
+            - ProductParser 인터페이스의 getProductsStream()를 이용해서 구현합니다.
          */
 
         List<Product> products = new ArrayList<>();
@@ -92,7 +92,7 @@ public class CsvProductParser implements ProductParser {
                 products.add(product);
             }
         }catch (Exception e){
-            //CsvParsingException 예외가 발생 하도록 구현 합니다.
+            // CsvParsingException 예외가 발생하도록 구현합니다.
             log.error("{}{}",e.getMessage(),e);
             throw new CsvParsingException();
         }
@@ -101,7 +101,7 @@ public class CsvProductParser implements ProductParser {
 
     @Override
     public void close() throws IOException {
-        //inputStream 객체가 존재하면 close() method를 호출해서 자원을 해제합니다.
+        // inputStream 객체가 존재하면 close() 메서드를 호출해서 자원을 해제합니다.
         if(Objects.nonNull(inputStream)){
             inputStream.close();
         }
