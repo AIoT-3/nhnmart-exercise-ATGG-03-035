@@ -33,39 +33,39 @@ public class EnteringQueue {
     private static final int DEFAULT_CAPACITY = 100;
     private final int capacity;
     public EnteringQueue(){
-        //TODO#3-1 기본 생성자 구현, capacity = DEFAULT_CAPACITY입니다.
+        // TODO#3-1 기본 생성자 구현, capacity = DEFAULT_CAPACITY입니다.
         queue = null;
         capacity=0;
     }
 
     public EnteringQueue(int capacity) {
-        //TODO#3-2 capacity <= 0이면 IllegalArgumentException이 발생합니다.
+        // TODO#3-2 capacity <= 0이면 IllegalArgumentException이 발생합니다.
 
 
-        //TODO#3-3 capacity와 queue를 초기화합니다.
+        // TODO#3-3 capacity와 queue를 초기화합니다.
         this.capacity = 0;
         queue = null;
     }
 
     public synchronized void addCustomer(Customer customer){
-        /*TODO#3-4 대기열에 고객을 추가하는 method를 구현합니다.
+        /* TODO#3-4 대기열에 고객을 추가하는 메서드를 구현합니다.
            - queue.size() >= capacity이면 대기할 수 있도록 구현합니다.
         */
 
 
-        //TODO#3-5 queue에 고객을 추가하고 대기하고 있는 Thread를 깨웁니다.
+        // TODO#3-5 queue에 고객을 추가하고 대기하고 있는 Thread를 깨웁니다.
         
     }
 
     public synchronized Customer getCustomer(){
-        //TODO#3-6 queue가 비워져 있다면 대기합니다.
+        // TODO#3-6 queue가 비어 있다면 대기합니다.
 
 
-        //TODO#3-7 queue에서 customer를 반환합니다, 대기하고 있던 thread를 깨웁니다.
+        // TODO#3-7 queue에서 Customer를 반환합니다. 대기하고 있던 Thread를 깨웁니다.
         return null;
     }
 
-    //TODO#3-8 queue size를 반환합니다.
+    // TODO#3-8 queue size를 반환합니다.
     public int getQueueSize(){
         return 0;
     }

@@ -23,12 +23,12 @@ public class CartItem implements Serializable {
     private final int quantity;
 
     public CartItem(long productId, int quantity) {
-        //productId < 0 or quantity < 0이면 IllegalArgumentException이 발생합니다.
+        // productId < 0 또는 quantity < 0이면 IllegalArgumentException이 발생합니다.
         if(productId<0 || quantity <0){
             throw new IllegalArgumentException("productId > 0");
         }
 
-        //productId, quantity를 초기화합니다.
+        // productId, quantity를 초기화합니다.
         this.productId = productId;
         this.quantity = quantity;
     }
