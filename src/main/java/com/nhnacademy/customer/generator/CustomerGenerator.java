@@ -27,23 +27,18 @@ import java.util.concurrent.atomic.AtomicLong;
 public class CustomerGenerator implements Runnable {
 
     //NhnMart 입장 대기열
-    private final EnteringQueue enteringQueue;
+    private EnteringQueue enteringQueue;
 
     //회원 번호 Id 생성
-    private final AtomicLong atomicId;
+    private AtomicLong atomicId;
 
     //회원이 보유한 default money
     private final static int DEFAULT_MONEY=10_00000;
 
     public CustomerGenerator(EnteringQueue enteringQueue) {
         // TODO#4-1 enteringQueue null이면 'IllegalArgumentException'이 발생하는지 검증합니다.
-        if (Objects.isNull(enteringQueue)) {
-            throw new IllegalArgumentException("enteringQueue is null");
-        }
 
         // TODO#4-2 enteringQueue, atomicId를 0으로 초기화합니다.
-        this.enteringQueue = enteringQueue;
-        this.atomicId = new AtomicLong(0);
 
     }
 
@@ -54,18 +49,6 @@ public class CustomerGenerator implements Runnable {
             - while 조건을 수정하세요.
             - 1초 간격으로 회원을 enteringQueue의 대기열에 등록합니다.
         */
-        while (!Thread.currentThread().isInterrupted()){
-            //1초 간격으로 회원을 enteringQueue의 대기열에 등록합니다.
-            try {
-                Customer customer = generate();
-                enteringQueue.addCustomer(customer);
-                log.info("customer added : {}", customer);
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                log.info("customer generator interrupted");
-                Thread.currentThread().interrupt();
-            }
-        }
     }
 
     private Customer generate(){
@@ -76,9 +59,6 @@ public class CustomerGenerator implements Runnable {
                - 회원이름 생성 시 https://github.com/Devskiller/jfairy 이용해서 구현합니다.
          */
 
-        Fairy fairy = Fairy.create();
-        Person person = fairy.person();
-        Customer customer = new Customer(atomicId.incrementAndGet(), person.getFullName(), DEFAULT_MONEY);
-        return customer;
+        return null;
     }
 }
