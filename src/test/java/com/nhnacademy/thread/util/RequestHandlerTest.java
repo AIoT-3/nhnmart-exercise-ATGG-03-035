@@ -45,7 +45,7 @@ class RequestHandlerTest {
         //TODO#8-3-8 producer(생산자)가 requestChannel에 실행할 작업을 1초에 한 번씩 총 5회 추가합니다.
         Thread producer = new Thread(()->{
             for(int i=1; i<=5; i++){
-                //구현
+
             }
         });
         producer.start();

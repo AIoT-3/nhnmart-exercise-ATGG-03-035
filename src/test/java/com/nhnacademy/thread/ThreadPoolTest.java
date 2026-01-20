@@ -82,9 +82,7 @@ class ThreadPoolTest {
 
 
         //TODO#8-1-13 threadList의 각각의 thread가 isAlive()면 aliveCount++ 될 수 있또록 구현
-        for(Thread thread : threadList){
-            //구현
-        }
+
         log.debug("aliveCount:{}",aliveCount);
         Assertions.assertEquals(10,aliveCount);
     }
@@ -101,9 +99,6 @@ class ThreadPoolTest {
         int terminatedCount = 0;
 
         //TODO#8-1-14 threadList의 각각의 thread의 상태가 TERMINATED이면 terminatedCount++ 될 수 있도록 구현 합니다.
-        for(Thread thread : threadList){
-            //구현
-        }
 
         log.debug("terminatedCount:{}",terminatedCount);
         Assertions.assertEquals(10,terminatedCount);

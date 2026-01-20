@@ -25,19 +25,17 @@ public class ThreadPool {
     private static final int DEFAULT_POOL_SIZE = 10;
 
     //thread pool size
-    private final int poolSize;
+    private int poolSize;
 
     //thread에 의해서 실행될 Runnable 구현체
-    private final Runnable runnable;
+    private Runnable runnable;
 
     //thread-pool에 생성된 thread list
-    private final List<Thread> threadList;
+    private List<Thread> threadList;
 
     public ThreadPool(Runnable runnable){
         //TODO#8-1-1 default 생성자 구현, poolSize = DEFAULT_POOL_SIZE를 사용합니다.
-        this.poolSize = 0;
-        this.runnable = null;
-        this.threadList = null;
+        this(DEFAULT_POOL_SIZE, runnable);
     }
 
     public ThreadPool(int poolSize, Runnable runnable) {

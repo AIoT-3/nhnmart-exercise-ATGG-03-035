@@ -90,7 +90,6 @@ class RequestChannelTest {
         }
         //TODO#8-2-12 requestChannel 작업을 할당받아 실행하세요.
 
-
         Try<Object> readFieldValue = ReflectionUtils.tryToReadFieldValue(RequestChannel.class, "requestQueue", requestChannel);
         Queue queue = (Queue) readFieldValue.get();
 
