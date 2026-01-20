@@ -37,19 +37,15 @@ class MemoryProductRepositoryTest {
         productRepository.save(actual);
 
         // TODO#6-4-8 2L에 해당되는 Product가 정상 등록되었는지 검증합니다.
-        Optional<Product> exceptedOptional = productRepository.findById(2L);
-        Assertions.assertEquals(exceptedOptional.get(),actual);
+
     }
 
     @Test
     @Order(2)
     @DisplayName("1L -> Product 조회")
     void findById() {
-        Optional<Product> actualOptional = productRepository.findById(1L);
-        Assertions.assertAll(
-            // TODO#6-4-9 1L에 해당되는 Product의 attribute를 검증합니다.
+        // TODO#6-4-9 1L에 해당되는 Product의 attribute를 검증합니다.
 
-        );
     }
 
     @Test
@@ -58,8 +54,6 @@ class MemoryProductRepositoryTest {
     void deleteById() {
         // TODO#6-4-10 ID: 2L인 Product를 삭제하고 정상 처리되었는지 검증합니다.
 
-        productRepository.deleteById(2L);
-        Assertions.assertFalse(productRepository.existById(2L));
     }
 
     @Test

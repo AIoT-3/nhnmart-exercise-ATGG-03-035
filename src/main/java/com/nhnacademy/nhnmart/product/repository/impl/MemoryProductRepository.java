@@ -28,7 +28,7 @@ public class MemoryProductRepository implements ProductRepository {
         - MemoryProductRepository는 파싱한 Product 객체를 저장하는 저장소이며 Product 데이터 관련된 처리를 합니다.
     */
 
-    private final ConcurrentMap<Long, Product> productConcurrentMap = new ConcurrentHashMap<>();
+    private ConcurrentMap<Long, Product> productConcurrentMap;
 
     @Override
     public void save(Product product) {

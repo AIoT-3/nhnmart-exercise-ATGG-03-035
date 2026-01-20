@@ -37,95 +37,55 @@ class ProductTest {
     @DisplayName("null 또는 empty 체크 : item, maker, specification, unit")
     void constructorTest1(){
 
-        Assertions.assertAll(
-                // null 체크
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,null,maker,specification,unit,price,quantity);
-                }),
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,item,null,specification,unit,price,quantity);
-                }),
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,item,maker,null,unit,price,quantity);
-                }),
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,item,maker,specification,null,price,quantity);
-                }),
-
-                // empty 체크
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,"",maker,specification,unit,price,quantity);
-                }),
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,item,"",specification,unit,price,quantity);
-                }),
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,item,maker,"",unit,price,quantity);
-                }),
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,item,maker,specification,"",price,quantity);
-                })
-        );
     }
 
     @Test
     @Order(2)
     @DisplayName("{ id, price, quantity } < 0 ")
     void constructorTest2(){
-        Assertions.assertAll(
-                // null 체크
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(-1,item,maker,specification,unit,price,quantity);
-                }),
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,item,maker,specification,unit,-100,quantity);
-                }),
-                ()->Assertions.assertThrows(IllegalArgumentException.class,()->{
-                    new Product(id,item,maker,specification,unit,price,-5);
-                })
-        );
+
     }
 
     @Test
     @Order(3)
     void getId() {
-        Assertions.assertEquals(id,product.getId());
+
     }
 
     @Test
     @Order(4)
     void getItem() {
-        Assertions.assertEquals(item,product.getItem());
+
     }
 
     @Test
     @Order(5)
     void getMaker() {
-        Assertions.assertEquals(maker,product.getMaker());
+
     }
 
     @Test
     @Order(6)
     void getSpecification() {
-        Assertions.assertEquals(specification,product.getSpecification());
+
     }
 
     @Test
     @Order(7)
     void getUnit() {
-        Assertions.assertEquals(unit,product.getUnit());
+
     }
 
     @Test
     @Order(8)
     void getPrice() {
-        Assertions.assertEquals(price,product.getPrice());
+
     }
 
     @Test
     @Order(9)
     void getQuantity() {
-        Assertions.assertEquals(quantity,product.getQuantity());
+
     }
 
     @Test

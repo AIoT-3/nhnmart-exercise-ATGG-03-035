@@ -96,9 +96,6 @@ class ProductServiceImplTest {
         Product product = new Product(1L,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100);
         productService.saveProduct(product);
 
-        // productService.saveProduct(product)를 호출하면 productRepository.existById(1L) 1회 호출되었는지 검증합니다.
-        Mockito.verify(productRepository, Mockito.times(1)).existById(anyLong());
-
         // TODO#6-5-16 productService.saveProduct(product)를 호출하면 productRepository.save(product)가 1회 호출되었는지 검증하는 코드를 작성하세요
 
     }
@@ -116,11 +113,6 @@ class ProductServiceImplTest {
 
         Product product = new Product(1L,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100);
 
-        Assertions.assertThrows(ProductAlreadyExistsException.class,()->{
-            productService.saveProduct(product);
-        });
-
-        Mockito.verify(productRepository, Mockito.times(1) ).existById(anyLong());
     }
 
     @Test
@@ -132,9 +124,6 @@ class ProductServiceImplTest {
 
         productService.deleteProduct(1L);
 
-        Mockito.verify(productRepository,Mockito.times(1)).existById(anyLong());
-        Mockito.verify(productRepository,Mockito.times(1)).deleteById(anyLong());
-
     }
 
     @Test
@@ -143,8 +132,7 @@ class ProductServiceImplTest {
     void getTotalCount() {
         Mockito.when(productRepository.count()).thenReturn(10L);
         long actual = productService.getTotalCount();
-        Assertions.assertEquals(10L, actual);
-        Mockito.verify(productRepository,Mockito.times(1)).count();
+
     }
 
     @Test
@@ -156,8 +144,6 @@ class ProductServiceImplTest {
 
         productService.updateQuantity(1L, 50);
 
-        Mockito.verify(productRepository,Mockito.times(1)).updateQuantityById(anyLong(),anyInt());
-        Mockito.verify(productRepository,Mockito.times(1)).existById(anyLong());
     }
 
     @Test
@@ -166,11 +152,6 @@ class ProductServiceImplTest {
     void updateQuantity_ProductNotFoundException(){
         Mockito.when(productRepository.existById(anyLong())).thenReturn(false);
 
-        Assertions.assertThrows(ProductNotFoundException.class,()->{
-            productService.updateQuantity(1L, 50);
-        });
-
-        Mockito.verify(productRepository,Mockito.times(1)).existById(anyLong());
     }
 
     @Test
@@ -186,7 +167,6 @@ class ProductServiceImplTest {
 
         productService.pickProduct(1L, 2);
 
-        Mockito.verify(productRepository,Mockito.times(1)).updateQuantityById(anyLong(),anyInt());
     }
 
     @Test
@@ -198,10 +178,6 @@ class ProductServiceImplTest {
         Mockito.when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
         Mockito.when(productRepository.existById(anyLong())).thenReturn(true);
 
-        Assertions.assertThrows(OutOfStockException.class,()->{
-            // 수량이 5개 남은 상황에서 10개를 장바구니에 담으려고 시도.
-            productService.pickProduct(1L, 10);
-        });
     }
 
     @Test

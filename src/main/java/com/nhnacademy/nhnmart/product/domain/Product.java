@@ -22,22 +22,22 @@ import java.util.Objects;
 public class Product {
 
     // Product ID
-    private final long id;
+    private long id;
 
     // 품목
-    private final String item;
+    private String item;
 
     // 메이커
-    private final String maker;
+    private String maker;
 
     // 스펙
-    private final String specification;
+    private String specification;
 
     // 단위
-    private final String unit;
+    private String unit;
 
     // 가격
-    private final int price;
+    private int price;
 
     // 수량
     private int quantity;
@@ -47,13 +47,7 @@ public class Product {
 
 
         // TODO#6-1-2 Product attribute를 초기화합니다.
-        this.id = 0;
-        this.item = null;
-        this.maker = null;
-        this.specification = null;
-        this.unit = null;
-        this.price = 0;
-        this.quantity = 0;
+
     }
 
     public long getId() {
@@ -94,8 +88,6 @@ public class Product {
     public void setQuantity(int quantity) {
         // TODO#6-1-10 quantity 수정, quantity < 0이면 IllegalArgumentException 발생
 
-
-        this.quantity = quantity;
     }
 
     // TODO#6-1-11 equals를 구현합니다.

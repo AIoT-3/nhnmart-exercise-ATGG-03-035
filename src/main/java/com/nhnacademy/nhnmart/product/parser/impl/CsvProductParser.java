@@ -34,16 +34,16 @@ public class CsvProductParser implements ProductParser {
 
     // 제품의 기본 수량 = 100개
     private final int DEFAULT_QUANTITY=100;
-    private final InputStream inputStream;
+    private InputStream inputStream;
 
     public CsvProductParser() {
         // TODO#6-2-1 기본 생성자 구현, getProductsStream()을 이용해서 inputStream을 초기화합니다.
-        inputStream = null;
+
     }
 
     public CsvProductParser(InputStream inputStream){
         // TODO#6-2-2 inputStream parameter로 전달됩니다. 초기화합니다.
-        this.inputStream = null;
+
     }
 
     @Override

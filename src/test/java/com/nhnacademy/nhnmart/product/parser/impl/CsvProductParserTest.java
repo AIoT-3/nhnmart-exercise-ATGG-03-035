@@ -44,7 +44,7 @@ class CsvProductParserTest {
     @Order(1)
     @DisplayName("instance of ProductParser")
     void constructorTest1(){
-        Assertions.assertInstanceOf(ProductParser.class,productParser);
+
     }
 
     @Test
@@ -59,26 +59,13 @@ class CsvProductParserTest {
     @Order(3)
     @DisplayName("/resources/product_data.csv 존재하는지 체크")
     void getStreamTest(){
-        InputStream inputStream = productParser.getProductsStream();
-        Assertions.assertNotNull(inputStream);
+
     }
 
     @Test
     @Order(4)
     @DisplayName("parsing from /test/resources/product_data.csv")
     void parse() {
-
-        List<Product> excepted = new ArrayList<>(5);
-        excepted.add(new Product(1L,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100));
-        excepted.add(new Product(2L,"주방세제","헨켈","(750㎖) 프릴 베이킹소다 퓨어레몬","개",8900,100));
-        excepted.add(new Product(3L,"주방세제","LG","(490㎖) 자연퐁POP 솔잎","개",5300,100));
-        excepted.add(new Product(4L,"키친타올","유한","크리넥스 150매×6","개",8600,100));
-        excepted.add(new Product(5L,"행주","유한","향균 블루 행주 타올 45매×4","개",10400,100));
-
-        List<Product> actual = productParser.parse();
-        for(Product product : actual){
-            log.debug("product:{}",product);
-        }
 
         // TODO#6-2-9 actual과 excepted가 일치하는지 검증합니다.
 

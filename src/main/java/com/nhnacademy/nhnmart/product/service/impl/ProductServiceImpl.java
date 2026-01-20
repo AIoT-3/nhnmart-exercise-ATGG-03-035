@@ -33,18 +33,16 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     // Product 저장소
-    private final ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     // Product 파서
-    private final ProductParser productParser;
+    private ProductParser productParser;
 
     public ProductServiceImpl(ProductRepository productRepository, ProductParser productParser) {
         // TODO#6-5-1 productRepository 또는 productParser가 null이면 IllegalArgumentException이 발생합니다.
 
 
         // TODO#6-5-2 productRepository, productParser를 초기화합니다.
-        this.productRepository = null;
-        this.productParser = null;
 
         // TODO#6-5-3 init() 메서드를 호출하여 초기화합니다.
 
@@ -52,10 +50,7 @@ public class ProductServiceImpl implements ProductService {
 
     private void init(){
         // TODO#6-5-4 productParser.parse()를 호출하고 반환된 List<Product> products를 productRepository를 통해서 Memory 저장소에 저장합니다.
-        List<Product> products = null;
-        for(Product product : products){
-            // save
-        }
+
     }
 
     @Override
@@ -72,11 +67,6 @@ public class ProductServiceImpl implements ProductService {
            - Product ID에 해당되는 제품이 이미 존재한다면 ProductAlreadyExistsException이 발생합니다.
         */
 
-        if(productRepository.existById(product.getId())){
-            throw new ProductAlreadyExistsException(product.getId());
-        }
-
-        productRepository.save(product);
     }
 
     @Override
@@ -109,7 +99,6 @@ public class ProductServiceImpl implements ProductService {
             - 조회 : getProduct(id)
             - 수량 변경 : updateQuantity(id, product.getQuantity()-quantity)
          */
-        Product product = null;
 
     }
 
@@ -121,10 +110,7 @@ public class ProductServiceImpl implements ProductService {
             - 조회 : getProduct(id)
             - 수량 변경 : updateQuantity(id, product.getQuantity()+quantity)
          */
-        Product product = null;
-        int updateQuantity  = 0;
-
-        return updateQuantity;
+        return 0;
     }
 
 }
