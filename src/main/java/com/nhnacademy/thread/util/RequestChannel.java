@@ -12,8 +12,6 @@
 
 package com.nhnacademy.thread.util;
 
-import java.util.LinkedList;
-import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 

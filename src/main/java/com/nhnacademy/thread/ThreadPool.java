@@ -12,7 +12,6 @@
 
 package com.nhnacademy.thread;
 
-import java.util.concurrent.ArrayBlockingQueue;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
