@@ -13,6 +13,9 @@
 package com.nhnacademy.nhnmart.entring;
 
 import com.nhnacademy.customer.domain.Customer;
+import java.util.Objects;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
@@ -34,32 +37,59 @@ public class EnteringQueue {
     private int capacity;
     public EnteringQueue(){
         // TODO#3-1 기본 생성자 구현, capacity = DEFAULT_CAPACITY입니다.
+        this(DEFAULT_CAPACITY);
     }
 
     public EnteringQueue(int capacity) {
         // TODO#3-2 capacity <= 0이면 IllegalArgumentException이 발생합니다.
-
+        if(capacity <= 0) {
+            throw new IllegalArgumentException();
+        }
         // TODO#3-3 capacity와 queue를 초기화합니다.
+        this.capacity = capacity;
+        this.queue = new ArrayBlockingQueue<>(capacity);
     }
 
     public synchronized void addCustomer(Customer customer){
         /* TODO#3-4 대기열에 고객을 추가하는 메서드를 구현합니다.
            - queue.size() >= capacity이면 대기할 수 있도록 구현합니다.
         */
+        while(queue.size() >= capacity) {
+            try {
+                wait();
+                log.info("Queue 입장 대기");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
 
         // TODO#3-5 queue에 고객을 추가하고 대기하고 있는 Thread를 깨웁니다.
+        queue.add(customer);
+        log.info("대기열 입장: {}", customer.getName());
+
+        notifyAll();
     }
 
     public synchronized Customer getCustomer(){
         // TODO#3-6 queue가 비어 있다면 대기합니다.
+        while(queue.isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
 
         // TODO#3-7 queue에서 Customer를 반환합니다. 대기하고 있던 Thread를 깨웁니다.
-        return null;
+        Customer customer = queue.poll();
+        notifyAll();
+        log.info("{} 마트 입장하세요.", Objects.requireNonNull(customer).getName());
+        return customer;
     }
 
     // TODO#3-8 queue size를 반환합니다.
     public int getQueueSize(){
-        return 0;
+        return queue.size();
     }
 
 }
