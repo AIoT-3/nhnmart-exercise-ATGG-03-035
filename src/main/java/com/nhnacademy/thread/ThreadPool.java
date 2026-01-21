@@ -12,6 +12,7 @@
 
 package com.nhnacademy.thread;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -40,18 +41,24 @@ public class ThreadPool {
 
     public ThreadPool(int poolSize, Runnable runnable) {
         // TODO#8-1-2 Thread Pool Size < 0 이라면 IllegalArgumentException이 발생합니다.
-
+        if(poolSize < 0) {
+            throw new IllegalArgumentException();
+        }
 
         // TODO#8-1-3 runnable == null 이면 IllegalArgumentException이 발생합니다.
-
+        if(Objects.isNull(runnable)) {
+            throw new IllegalArgumentException();
+        }
 
         // TODO#8-1-4 runnable이 Runnable의 구현체가 아니라면 IllegalArgumentException이 발생합니다.
-
+        if(!(runnable instanceof Runnable)) {
+            throw new IllegalArgumentException();
+        }
 
         // TODO#8-1-5 poolSize, runnable, threadList 초기화
-        this.poolSize = 0;
-        this.runnable = null;
-        this.threadList = null;
+        this.poolSize = poolSize;
+        this.runnable = runnable;
+        this.threadList = new ArrayList<>();
     }
 
     private void createThread(){
@@ -59,12 +66,25 @@ public class ThreadPool {
           - Thread가 생성되는 과정은 동기화되어야 합니다.
           - mutex, semaphore, synchronized 등등.. 적절히 구현합니다.
         */
-
+        synchronized (this) {
+            for (int i = 0; i < poolSize; i++) {
+                Thread thread = new Thread(runnable, "thread-"+i);
+                threadList.add(thread);
+            }
+            log.info("{}개 스레드생성", poolSize);
+        }
     }
 
     public synchronized void start(){
         // TODO#8-1-7 생성된 Thread를 시작합니다.
+        if(threadList.isEmpty()) {
+            createThread();
+        }
 
+        for(Thread thread : threadList) {
+            thread.start();
+            log.info("{} start", thread.getName());
+        }
     }
 
     public synchronized void stop(){
@@ -72,9 +92,20 @@ public class ThreadPool {
             - Thread가 종료되는 과정에서 동기화되어야 합니다.
             - 우선 모든 Thread interrupt 호출
          */
-
+        for(Thread thread : threadList) {
+            thread.interrupt();
+        }
+        log.info("모든 스레드에게 interrupt 신호");
 
         // TODO#8-1-9 join()를 이용해서 모든 Thread가 종료될 때까지 대기 상태로 만듭니다.
+        for(Thread thread : threadList) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        log.info("모든 스레드 종료");
 
     }
 }
