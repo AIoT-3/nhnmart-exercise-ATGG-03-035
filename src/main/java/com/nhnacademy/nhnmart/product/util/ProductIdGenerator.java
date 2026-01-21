@@ -13,6 +13,7 @@
 package com.nhnacademy.nhnmart.product.util;
 
 import java.util.concurrent.atomic.AtomicLong;
+import org.checkerframework.checker.units.qual.A;
 
 /**
  * Product ID를 생성하는 유틸리티
@@ -20,10 +21,10 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class ProductIdGenerator {
 
     // TODO#6-3-1 idGenerator를 0으로 초기화합니다.
-    private static AtomicLong idGenerator;
+    private static AtomicLong idGenerator = new AtomicLong(0);
 
     public static long getNewId(){
         // TODO#6-3-2 idGenerator를 1 증가시키고 반환합니다.
-        return  0L;
+        return idGenerator.incrementAndGet();
     }
 }

@@ -30,45 +30,63 @@ public class MemoryProductRepository implements ProductRepository {
 
     private ConcurrentMap<Long, Product> productConcurrentMap;
 
+    public MemoryProductRepository() {
+        this.productConcurrentMap = new ConcurrentHashMap<>();
+    }
+
     @Override
     public void save(Product product) {
         // TODO#6-4-1 Product 저장
-
+        if (Objects.isNull(product)) {
+            throw new IllegalArgumentException();
+        }
+        productConcurrentMap.put(product.getId(), product);
     }
     @Override
     public Optional<Product> findById(long id) {
         // TODO#6-4-2 id에 해당되는 Product 조회
-        return null;
+        return Optional.ofNullable(productConcurrentMap.get(id));
     }
 
     @Override
     public void deleteById(long id) {
         // TODO#6-4-3 id에 해당하는 Product 삭제
-
+        if (productConcurrentMap.remove(id) == null) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
     public boolean existById(long id) {
         // TODO#6-4-4 id에 해당하는 Product 존재 여부를 체크해서 반환합니다.
-        return false;
+        if(id < 1) {
+            throw new IllegalArgumentException();
+        }
+        return productConcurrentMap.containsKey(id);
     }
 
     @Override
     public long count() {
         // TODO#6-4-5 전체 Product 수 반환
-        return 0;
+        return productConcurrentMap.size();
     }
 
     @Override
     public int countQuantityById(long id) {
         // TODO#6-4-6 id에 해당되는 Product의 수량 반환(즉 재고 확인)
-        return 0;
+        return productConcurrentMap.get(id).getQuantity();
     }
 
     @Override
     public void updateQuantityById(long id, int quantity) {
         // TODO#6-4-7 id에 해당되는 Product의 수량 변경
+        Product updated = productConcurrentMap.computeIfPresent(id, (k, product) -> {
+            product.setQuantity(quantity);
+            return product;
+        });
 
+        if (updated == null) {
+            throw new IllegalArgumentException("Product not found");
+        }
     }
-
 }

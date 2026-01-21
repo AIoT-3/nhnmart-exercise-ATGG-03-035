@@ -47,6 +47,7 @@ class ProductServiceImplTest {
     @DisplayName("instance of ProductService")
     void constructorTest1(){
         // TODO#6-5-12 productService가 ProductService.class의 구현체인지 검증합니다.
+        Assertions.assertInstanceOf(ProductService.class, productService);
 
     }
 
@@ -57,6 +58,10 @@ class ProductServiceImplTest {
                  /* TODO#6-5-13 ProductServiceImpl 생성할 때 parameter {productRepository, productParser}가 null이면 IllegalArgumentException이 발생하는지 검증합니다.
             - Assertions.assertAll()을 이용하여 검증합니다.
          */
+        Assertions.assertAll(
+                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> new ProductServiceImpl(null, productParser)),
+                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> new ProductServiceImpl(productRepository, null))
+        );
     }
 
     @Test
@@ -71,7 +76,7 @@ class ProductServiceImplTest {
         Product actual = productService.getProduct(1L);
 
         // TODO#6-5-14 excepted와 actual이 일치하는지 검증합니다.
-
+        Assertions.assertEquals(excepted, actual);
     }
 
     @Test
@@ -83,7 +88,7 @@ class ProductServiceImplTest {
         Mockito.when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         // TODO#6-5-15 ID -> 1 제품이 존재하지 않는다면 ProductNotFoundException이 발생하는지 검증합니다.
-
+        Assertions.assertThrows(ProductNotFoundException.class, () -> productService.getProduct(1L));
     }
 
     @Test
@@ -97,7 +102,7 @@ class ProductServiceImplTest {
         productService.saveProduct(product);
 
         // TODO#6-5-16 productService.saveProduct(product)를 호출하면 productRepository.save(product)가 1회 호출되었는지 검증하는 코드를 작성하세요
-
+        Mockito.verify(productRepository, Mockito.times(1)).save(product);
     }
 
     @Test
@@ -109,10 +114,10 @@ class ProductServiceImplTest {
                  /* TODO#6-5-17 productRepository.existById()를 호출하면 true 반환되도록 코드를 작성합니다.
             - Mockito.when()을 이용하여 코드를 작성합니다.
          */
-
+        Mockito.when(productRepository.existById(anyLong())).thenReturn(true);
 
         Product product = new Product(1L,"주방세제","LG","(750㎖) 자연퐁 스팀워시 레몬","개",9900,100);
-
+        Assertions.assertThrows(ProductAlreadyExistsException.class, () -> productService.saveProduct(product));
     }
 
     @Test
@@ -123,7 +128,7 @@ class ProductServiceImplTest {
         Mockito.doNothing().when(productRepository).deleteById(anyLong());
 
         productService.deleteProduct(1L);
-
+        Mockito.verify(productRepository, Mockito.times(1)).deleteById(1L);
     }
 
     @Test
@@ -133,6 +138,7 @@ class ProductServiceImplTest {
         Mockito.when(productRepository.count()).thenReturn(10L);
         long actual = productService.getTotalCount();
 
+        Assertions.assertEquals(10L, actual);
     }
 
     @Test
@@ -144,6 +150,8 @@ class ProductServiceImplTest {
 
         productService.updateQuantity(1L, 50);
 
+        Mockito.verify(productRepository, Mockito.times(1)).existById(1L);
+        Mockito.verify(productRepository, Mockito.times(1)).updateQuantityById(1L, 50);
     }
 
     @Test
@@ -152,6 +160,9 @@ class ProductServiceImplTest {
     void updateQuantity_ProductNotFoundException(){
         Mockito.when(productRepository.existById(anyLong())).thenReturn(false);
 
+        Assertions.assertThrows(ProductNotFoundException.class,
+                () -> productService.updateQuantity(1L, 50)
+        );
     }
 
     @Test
@@ -178,10 +189,13 @@ class ProductServiceImplTest {
         Mockito.when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
         Mockito.when(productRepository.existById(anyLong())).thenReturn(true);
 
+        Assertions.assertThrows(OutOfStockException.class, () -> {
+            productService.pickProduct(1L, 6);
+        });
     }
 
     @Test
-    @Order(11)
+    @Order(13)
     @DisplayName("장바구니에 담긴 제품을 매대에 반납합니다.")
     void returnProduct() {
 
@@ -191,7 +205,7 @@ class ProductServiceImplTest {
         Mockito.doNothing().when(productRepository).updateQuantityById(anyLong(),anyInt());
 
         // TODO#6-5-18 productService.returnProduct()를 호출하여 매대에 제품을 반납합니다. 반납된 제품의 수량이 정확히 계산되었는지 검증하는 코드를 작성하세요
-
-
+        int result = productService.returnProduct(1L, 1);
+        Assertions.assertEquals(6, result);
     }
 }
