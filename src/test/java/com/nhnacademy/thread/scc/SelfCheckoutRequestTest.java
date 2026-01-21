@@ -84,8 +84,9 @@ class SelfCheckoutRequestTest {
         // customer, cart, productService를 검증합니다.
 
         Assertions.assertAll(
-            ()->Assertions.assertTrue(true)
-        );
+                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> new SelfCheckoutRequest(null, cart, productService)),
+                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> new SelfCheckoutRequest(customer, null, productService)),
+                () -> Assertions.assertThrows(IllegalArgumentException.class, () -> new SelfCheckoutRequest(customer, cart, null)));
     }
 
     @Test
@@ -97,7 +98,7 @@ class SelfCheckoutRequestTest {
         selfCheckoutRequest.execute();
 
         // TODO#9-2-5 customer money : 100_0000 - 18800 = 981200 검증합니다.
-
+        Assertions.assertEquals(981200, customer.getMoney());
     }
 
     @Test
@@ -120,8 +121,7 @@ class SelfCheckoutRequestTest {
 
         // TODO#9-2-7 customer의 money 부족으로 제품을 모두 반납합니다. 현재 cart에 {1L,2L} 제품이 있으므로 productService.returnProduct() 2회 호출됩니다.
         // Mockito.verify()를 이용해서 검증합니다.
-
-
+        Mockito.verify(productService, Mockito.times(2)).returnProduct(anyLong(), anyInt());
     }
 
     @Test
